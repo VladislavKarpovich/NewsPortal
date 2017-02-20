@@ -1,9 +1,17 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: tahoma, pt-sans;
-    background: #EBEBEB;
+    position: relative;
+    font-family: "Roboto", sans-serif;
+    background: #F5F5F5;
     margin: 0px;
-    padding: 0px;
+    padding-bottom: 6rem;
     top: 0;
+    min-height: 100%;
 }
 
 .header-line {
@@ -15,19 +23,24 @@ body {
     bottom: auto;
 }
 
-header, section, footer {
+header, main {
     margin: 0 auto;
     max-width: 70em;
     display: block;
+    overflow: hidden;
 }
 
 header {
-    background: none repeat scroll 0 0 #FFF;
+    background: #01579B;
     margin-bottom: 1.25em;
-    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+    max-width: 72em;
+    border-radius: 0 0 5px 5px;
 }
 
 .logo {
+    font-family: Eras Bold ITC;
+    color: #FFF;
     padding: 1em;
     font-size: 2.3em;
     font-weight: 100;
@@ -35,115 +48,295 @@ header {
     text-decoration: none;
 }
 
+header span {
+    color: #FFF;
+    padding: 0.7em;
+    padding-right: 1em;
+    font-size: 1.1em;
+    letter-spacing: -1px;
+    text-decoration: none;
+    float: right;
+    border-right: #FFF 3px solid;
+    cursor: pointer;
+}
+
 #log-in-button {
-    background: #FFF;
-    padding: 0.4em;
+    background: transparent;
+    padding: 0.7em;
     float: right;
     text-align: center;
     border-style: none;
-    font-size: 1.3em;
-    color: #00F;
+    font-size: 1.1em;
+    color: #FFF;
     cursor: pointer;
     outline-style: none;
 }
 
-.filter-button {
+#filter-button, #button-add-post {
     position: fixed;
     right: 2em;
     bottom: 2em;
-    width: 3em;
-    height: 3em;
+    width: 2.5em;
+    height: 2.5em;
     border-radius: 1.5em 1.5em 1.5em 1.5em;
     box-shadow: 0 7px 14px rgba(0, 0, 0, 0.5);
-    background-color: #CCC;
+    background-color: #01579B;
     border-style: none;
     outline-style: none;
     font-size: 1.3em;
     cursor: pointer;
     padding: 0.6em;
     padding-top: 0.8em;
+    z-index: 2;
 }
 
-.filter-button-image {
-    width: 1.75em;
-    height: 1.75em;
+#filter-button {
+    right: 2em;
 }
 
-section {
+#button-add-post {
+    right: 5em;
+}
+
+.button-image {
     width: 100%;
+    height: 100%;
 }
 
 main {
-    margin-top: 3.5em;
-    margin-bottom: 2em;
+    margin-top: 2.75em;
+    margin-bottom: 1em;
 }
 
-article {
-    width: 48%;
+.main-page article {
+    overflow: hidden;
+    width: 49.5%;
+    height: 20em;
+    margin: 0.25%;
+    font-size: 1em;
     float: left;
-    background-color: #FFF;
-    border-color: #000;
-    margin: 0.5%;
-    padding: 0.5%;
+    background-color: #EEEEEE;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
 
-span {
+.main-page .image-container {
+    float: left;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.main-page .post-image {
+    height: 100%;
+}
+
+.main-page .post-text-container {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.main-page .post-button {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    float: right;
+    background: transparent;
+    border-style: none;
+    cursor: pointer;
+    outline-style: none;
+}
+
+.button-image {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.main-page .post-name {
+    padding: 5%;
+    padding-bottom: 0;
+    height: 20%;
+    width: calc(90% - 50px);
     text-align: center;
-    font-size: 1em;
-    text-decoration: none;
-    color: #888
+    vertical-align: middle;
+    font-size: 1.4em;
+    font-family: Calibri Light;
+    color: #455A64;
 }
 
-.post-name {
-    text-align: center;
-    padding: 0.3em;
-    font-size: 1.5em;
-    font-weight: 100;
-    text-decoration: none;
-}
-
-.short-discription {
-    text-align: justify;
-    padding: 1em;
-    font-size: 1em;
-    text-decoration: none;
-}
-
-.author-name, .publication-date {
-    text-align: right;
-    padding: 0em;
-    padding-right: 2em;
+.main-page .short-discription {
+    color: #212121;
+    height: 60%;
     font-size: 0.8em;
-    font-weight: 100;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    text-align: justify;
+    overflow: hidden;
+}
+
+.main-page .publication-date, .main-page .author-name {
+    width: 100%;
+    height: 5%;
+    padding-right: 1em;
+    text-align: right;
+    font-size: 0.7em;
     text-decoration: none;
     color: #999;
+    float: right;
 }
 
 .publication-date {
     font-style: italic;
 }
 
-.post-tags {
-    text-align: left;
-    padding: 0em;
-    padding-right: 2em;
-    font-size: 0.8em;
-    font-weight: 100;
+.main-page .post-tags {
+    height: 5%;
+    width: 100%;
+    font-size: 0.7em;
+    color: #E0E0E0;
+    text-align: center;
     text-decoration: none;
     color: #999;
+    float: right;
+}
+
+.pagination {
+    margin-left: 35%;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    background-color: #03A9F4;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.post-page div {
+    overflow: hidden;
+    width: 97%;
+    margin: 0.5%;
+    padding: 1%;
+    font-size: 1em;
+    float: left;
+    background-color: #FAFAFA;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    font-family: "Roboto", sans-serif;
+}
+
+.post-page .post-name {
+    font-weight: bold;
+    text-align: center;
+    font-size: 2em;
+    color: #455A64;
+}
+
+.post-page .image-container {
+    width: 99%;
+    padding: 0;
+}
+
+.post-page .post-image {
+    width: 100%;
+}
+
+.post-page .author-name, .post-page .publication-date {
+    width: 47%;
+    margin: 0.5%;
+    padding: 1%;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.post-page .post-tags {
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.post-page .post-button {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    float: right;
+    background: transparent;
+    border-style: none;
+    cursor: pointer;
+    outline-style: none;
+}
+
+#post-view-delete-post-button, #post-view-edit-post-button {
+    position: fixed;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 1.5em 1.5em 1.5em 1.5em;
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.5);
+    background-color: #01579B;
+    border-style: none;
+    outline-style: none;
+    font-size: 1.3em;
+    cursor: pointer;
+    padding: 0.6em;
+    padding-top: 0.8em;
+    z-index: 2;
+}
+
+#post-view-delete-post-button {
+    bottom: 2em;
+    right: 5em;
+}
+
+#post-view-edit-post-button {
+    bottom: 2em;
+    right: 2em;
+}
+
+.error-page h1 {
+  padding: 0.3em;
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 40px;
+  text-align: center;
+  width: 100%;
+  color: #03A9F4;
+}
+
+.error-page h6 {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  text-align: justify;
+  width: 70%;
+  margin-left: 15%;
+}
+
+.clearfix {
+    clear: both;
 }
 
 footer {
-    background: #AAA;
-    padding: 0.2em;
-    padding-top: 1em;
-    clear: both;
-    position: relative;
+    background: #E0E0E0;
     text-align: center;
-    border-radius: 15px 15px 0 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
 }
+
+
+/*---- form ----*/
 
 .tri-right::after {
     content: ' ';
@@ -151,71 +344,172 @@ footer {
     right: 0px;
     bottom: -20px;
     border: 12px solid;
-    border-color: lightyellow lightyellow transparent transparent;
+    border-color: #FAFAFA #FAFAFA transparent transparent;
+}
+
+.filter-form, .log-in-form {
+    position: fixed;
+    z-index: 100;
+    padding: 1em;
+    background: #FAFAFA;
+    display: none;
 }
 
 .filter-form {
-    display: none;
-    position: fixed;
-    width: 23em;
+    width: 26em;
     right: 4.5em;
     bottom: 5.5em;
-    background: #fff;
     border-radius: 15px 15px 0 15px;
-    z-index: 100;
-    padding: 1em;
+    background: #FAFAFA;
 }
 
-.filter-form p {
-  text-align: center;
-    font-size: 1.5em;
-    margin: 0.125em;
-    margin-bottom: 0.5em;
+.filter-form p, .log-in-form p, .edit-form p {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    color: #03A9F4;
+    font-size: 14px;
 }
 
-.filter-form label {
-    width: 3.5em;
+.filter-form label, .edit-form label {
+    font-family: "Roboto", sans-serif;
     height: 1.7em;
-    font: 0.7em;
     display: inline-block;
 }
 
-.filter-form input[type=text] {
-    width: 20em;
-    height: 1em;
-    font: 0.7em;
-    border: 1px solid #ccc;
+.filter-form input, .log-in-form input, .edit-form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    border: 0;
+    background: #f2f2f2;
+    padding: 15px;
+    margin: 0 0 5% 5%;
+    box-sizing: border-box;
+    font-size: 14px;
 }
 
-.filter-form input[type="submit"] {
-    background: #FFF;
-    padding: 0.5em;
-    float: right;
-    text-align: center;
-    border-style: none;
-    font-size: 1em;
-    color: #00F;
+.log-in-form input {
+    width: 100%;
+    margin: 0 0 3% 0;
+}
+
+.filter-form input {
+    width: 90%;
+}
+
+.log-in-form button, .filter-form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #03A9F4;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
     cursor: pointer;
-    outline-style: none;
+}
+
+.log-in-form {
+    border-radius: 15px 15px 15px 15px;
+    left: 30%;
+    top: 15%;
+    width: 40%;
+    padding: 1em;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.edit-form {
+    padding: 1em;
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.edit-form p {
+    font-size: 20px;
+}
+
+.edit-form label {
+    font-family: "Roboto", sans-serif;
+    height: 1.7em;
+    display: inline-block;
+}
+
+.edit-form input, .edit-form textarea {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    border: 0;
+    background: #E2E2E2;
+    width: 96%;
+    margin: 1%;
+    padding: 1%;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#add-text-input, #add-url-input, #editing-completed {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #03A9F4;
+    width: 14em;
+    height: 4em;
+    margin: 1em;
+    border: 0;
+    padding: 1em;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 20px;
 }
 
 #overlay {
+    display: none;
     width: 100%;
     height: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    display: none;
+    z-index: 3;
     background: #000;
     opacity: 0.8;
 }
 
 @media (max-width: 600px), (orientation: portrait) {
-    article {
-        width: 98%;
+    .header-line span {
+        display: none;
     }
-    body {
-        font-size: 12px;
+    header {
+        box-shadow: 0 0 0;
+        border-radius: 0px;
+    }
+    .main-page article {
+        width: 100%;
+        margin-bottom: 0.5em;
+        margin-left: 0;
+        margin-right: 0;
+        box-shadow: 0 0 0;
+    }
+    .post-page article div {
+        box-shadow: 0 0 0;
+        border-top: #000 1px solid;
+        border-bottom: #000 1px solid;
+        width: 99%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .post-page .author-name, .post-page .publication-date {
+        width: 99%;
+        margin-left: 0;
+        margin-right: 0;
     }
     .tri-right::after {
         display: none;
@@ -226,16 +520,32 @@ footer {
         width: 100%;
         border-radius: 0;
     }
-    .filter-form form {
-      padding-left: 5%;
-      padding-right: 5%;
+    .main-page .post-button {
+        display: none;
     }
-    .filter-form label {
-        width: 20%;
+    .log-in-form {
+        width: 100%;
+        top: 10%;
+        left: 0;
+        border-radius: 0px;
     }
-    .filter-form input[type=text] {
-        width: 70%;
+    #add-text-input, #add-url-input, #editing-completed {
+        width: 98%;
+        height: 3em;
+        margin: 1%;
+        padding: 1%;
     }
-    .filter-form input[type="submit"] {
+}
+
+@media (max-width: 1200px) {
+    header {
+        border-radius: 0px;
+        max-width: 100em;
+    }
+}
+
+@media (max-width: 900px) {
+    .post-text-container {
+        font-size: 0.7em;
     }
 }
