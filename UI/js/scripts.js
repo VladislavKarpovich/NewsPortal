@@ -1,5 +1,6 @@
 ;
 /*---- view ------*/
+
 var view = {
   hideFilterForm: function () {
     var overLay = document.getElementById('overlay');
@@ -112,14 +113,13 @@ var controller = {
 
       element = document.getElementById('login-form-button');
       element.onclick = controller.loginFormButtonHandleClick;
-
-      /*
-      element = document.getElementById('add-text-input');
+/*
+      var element = document.getElementById('add-text-input');
       element.onclick = controller.addDynamicTextInputHandleClick;
 
       element = document.getElementById('add-url-input');
       element.onclick = controller.addDynamicUrlInputHandleClick;
-      */
+*/
     }
   };
 

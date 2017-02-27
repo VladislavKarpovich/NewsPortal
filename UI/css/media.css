@@ -1,0 +1,74 @@
+@media (max-width: 600px), (orientation: portrait) {
+    .header-line span {
+        display: none;
+    }
+    header {
+        box-shadow: 0 0 0;
+        border-radius: 0px;
+    }
+    .main-page article {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 2px;
+        box-shadow: 0 0 0;
+        border-bottom: 1px #000 solid;
+    }
+    .post-page article div {
+        box-shadow: 0 0 0;
+        border-top: #000 1px solid;
+        border-bottom: #000 1px solid;
+        width: 99%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .post-page .author-name, .post-page .publication-date {
+        width: 99%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .tri-right::after {
+        display: none;
+    }
+    .filter-form {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+    .main-page .post-button {
+        display: none;
+    }
+    .log-in-form {
+        width: 100%;
+        top: 10%;
+        left: 0;
+        border-radius: 0px;
+    }
+    #add-text-input, #add-url-input, #editing-completed {
+        width: 98%;
+        height: 3em;
+        margin: 1%;
+        padding: 1%;
+    }
+
+    .pagination {
+    margin-left: 10%;
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 600px){
+    header {
+        border-radius: 0px;
+        max-width: 100em;
+    }
+
+    .main-page article {
+        width: 49%;
+        margin: 0.5%;
+    }
+
+    .pagination {
+    margin-left: 27%;
+    }
+
+}
