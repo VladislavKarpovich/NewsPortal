@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
 html {
   height: 100%;
   box-sizing: border-box;
@@ -21,22 +22,20 @@ body {
     margin: 0;
     top: 0;
     bottom: auto;
+    background: #01579B;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
 }
 
-header, main {
+header, main, nav {
     margin: 0 auto;
     max-width: 70em;
     display: block;
-    overflow: hidden;
 }
 
 header {
-    background: #01579B;
-    margin-bottom: 1.75em;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
-    max-width: 72em;
+    max-width: 80em;
     height: 4.5em;
-    border-radius: 0 0 5px 5px;
 }
 
 .logo {
@@ -50,42 +49,48 @@ header {
     float: left;
 }
 
-header form {
-    padding: 0.1em;
-    padding-left: 1em;
-    font-size: 2.5em;
+nav {
     float: left;
+    margin-top: 2em;
+    margin-left: 1em;
 }
 
-header form input {
+nav img {
+    margin-top: -0.2em;
+    width: 2em;
+    height: 2em;
+    display: none;
+}
+
+nav button {
+    background: transparent;
+    text-align: center;
+    border-style: none;
+    color: #BCF;
+    cursor: pointer;
+    outline-style: none;
+}
+
+header input {
     color: #D3D3D3;
-    background: #1A237E;
+    background: #00237E;
     border-radius: 10px;
     border: 0;
-    height: 2rem;
-    width: 25rem;
-    padding: 1%;
+    width: 18rem;
+    margin-top: 1.8em;
+    margin-left: 1em;
+    padding: 0.5em;
     padding-left: 1em;
     box-sizing: border-box;
     font-size: 14px;
-    outline: none;    
-}
-
-header span {
-    color: #FFF;
-    padding: 0.7em;
-    padding-right: 1em;
-    font-size: 1.1em;
-    letter-spacing: -1px;
-    text-decoration: none;
-    float: right;
-    border-right: #FFF 3px solid;
-    cursor: pointer;
+    outline: none; 
+    float: left;   
 }
 
 #log-in-button {
     background: transparent;
     padding: 1.3em;
+    padding-top: 1.7em;
     float: right;
     text-align: center;
     border-style: none;
@@ -108,16 +113,18 @@ header span {
     outline-style: none;
     font-size: 1.3em;
     cursor: pointer;
-    padding: 0.6em;
-    padding-top: 0.8em;
     z-index: 2;
 }
 
 #filter-button {
+    padding: 0.6em;
+    padding-top: 0.8em;
     right: 2em;
 }
 
 #button-add-post {
+    padding: 0.7em;
+    padding-top: 0.75em;
     right: 5em;
 }
 
@@ -418,6 +425,7 @@ footer {
 .log-in-form input {
     width: 100%;
     margin: 0 0 3% 0;
+    display: none;
 }
 
 .filter-form input {

@@ -1,4 +1,4 @@
-@media (max-width: 600px), (orientation: portrait) {
+@media (max-width: 700px), (orientation: portrait) {
     .header-line span {
         display: none;
     }
@@ -6,6 +6,60 @@
         box-shadow: 0 0 0;
         border-radius: 0px;
     }
+
+    .header-menu {
+        position: fixed;
+        background: #f2f2f2;
+        width: 70%;
+        height: 100%;
+        left: 30%;
+        top: 0;
+        margin: 0 0 5% 5%;
+        box-sizing: border-box;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+    header input {
+        border-radius: 5px;;
+        outline: 0;
+        border: 0;
+        background: #E2E2E2;
+        width: 90%;
+        margin: 4%;
+        margin-top: 3em;
+        color: #333;
+        padding: 2%;
+        box-sizing: border-box;
+        font-size: 14px;
+    }
+
+    nav button {
+        position: relative;
+        display: block;
+        background-color: transparent;
+        min-width: none;
+        font-size: 20px;
+        padding: 10px;
+        color: #03A9F4;
+    }
+    
+    #log-in-button {
+        float: left;
+        border-style: none;
+        cursor: pointer;
+        outline-style: none;
+        text-transform: uppercase;
+        outline: 0;
+        background: #03A9F4;
+        width: 40%;
+        margin-left: 30%;
+        margin-top: 5em;
+        border: 0;
+        padding: 15px;
+        font-size: 14px;
+        cursor: pointer;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+    }
+
     .main-page article {
         width: 100%;
         margin: 0;
@@ -54,9 +108,13 @@
     .pagination {
     margin-left: 10%;
     }
+
+    #filter-button, #button-add-post {
+    bottom: 0.5em;
+    }
 }
 
-@media (max-width: 1200px) and (min-width: 600px){
+@media (max-width: 1100px) and (min-width: 700px){
     header {
         border-radius: 0px;
         max-width: 100em;
@@ -68,7 +126,34 @@
     }
 
     .pagination {
-    margin-left: 27%;
+        margin-left: 27%;
     }
 
+    header input {
+        width: 15rem;
+    }
+
+    nav img {
+        display: block;
+    }
+
+    .nav-buttons {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    nav button {
+        color: #000;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    nav:hover .nav-buttons {
+        display: block;
+    }
 }

@@ -3,6 +3,9 @@
 
 <head>
     <script type="text/javascript" src="js/scripts.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/media.css">
     <meta charset="utf-8">
     <title>DevNews</title>
 </head>
@@ -12,11 +15,22 @@
 
     <div class="header-line">
         <header>
-            <a class="logo" href="index.html">DevNews</a>
-            <form class="search-form">
-                 <input type="text" placeholder="Поиск">
-            </form>
-            <button type="button" name="login" id="log-in-button">Войти</button>
+            <a class="logo" href="index.html">IT-News</a>
+            <div class="header-menu">          
+                <input type="text" placeholder="Поиск">
+                <nav>
+                    <img src="img/book.png" alt="">
+                    <div class="nav-buttons">
+                        <button>Все</button>
+                        <button>Разработка</button>
+                        <button>Администрирование</button>
+                        <button>Дизайн</button>
+                        <button>Управление</button>
+                        <button>Маркетинг</button>
+                    </div>
+                </nav>
+                <button type="button" name="login" id="log-in-button">Войти</button>
+            </div> 
         </header>
     </div>
 
@@ -80,9 +94,6 @@
         <button id="login-form-button">OK</button>
     </form>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animation.css">
-    <script src="js/scripts.js"></script>
 </body>
 
 </html>

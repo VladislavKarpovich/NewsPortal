@@ -3,8 +3,11 @@
 
 <head>
     <script type="text/javascript" src="js/scripts.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/media.css">
     <meta charset="utf-8">
-    <title>DevNews</title>
+    <title>IT-News</title>
 </head>
 
 <body>
@@ -12,18 +15,30 @@
 
     <div class="header-line">
         <header>
-            <a class="logo" href="index.html">DevNews</a>
-            <form class="search-form">
-                 <input type="text" placeholder="Поиск">
-            </form>
-            <button type="button" name="login" id="log-in-button">Войти</button>
+            <a class="logo" href="index.html">IT-News</a>
+            <div class="header-menu">          
+                <input type="text" placeholder="Поиск">
+                <nav>
+                    <img src="img/book.png" alt="">
+                    <div class="nav-buttons">
+                        <button>Все</button>
+                        <button>Разработка</button>
+                        <button>Администрирование</button>
+                        <button>Дизайн</button>
+                        <button>Управление</button>
+                        <button>Маркетинг</button>
+                    </div>
+                </nav>
+                <button type="button" name="login" id="log-in-button">Войти</button>
+            </div> 
         </header>
     </div>
+
 
     <main class="main-page">
         <article>
             <div class="image-container">
-                <img src="https://cnet2.cbsistatic.com/img/-nuTfYSy0QrL0lKGac0Mh3Mo0q8=/770x578/2017/02/08/3e1cca11-cb66-40e2-9577-ead824203910/samsung-chromebook-pro-18.jpg" alt="" class="post-image">
+                <img src="https://cdn.pixabay.com/photo/2015/05/26/23/52/technology-785742_960_720.jpg" alt="" class="post-image">
             </div>
             <div class="post-text-container">
 
@@ -342,10 +357,5 @@
         <input type="password" placeholder="пароль">
         <button id="login-form-button">OK</button>
     </form>
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animation.css">
-    <link rel="stylesheet" href="css/media.css">
-    <script src="js/scripts.js"></script>
 </body>
 </html>
