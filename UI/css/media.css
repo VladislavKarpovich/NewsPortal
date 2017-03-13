@@ -7,6 +7,10 @@
         border-radius: 0px;
     }
 
+    #burger-menu-button {
+        display: block;
+    }
+
     .header-menu {
         position: fixed;
         background: #f2f2f2;
@@ -17,6 +21,7 @@
         margin: 0 0 5% 5%;
         box-sizing: border-box;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        display: none;
     }
     header input {
         border-radius: 5px;;
@@ -60,13 +65,72 @@
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
     }
 
-    .main-page article {
+    #main-page h1 {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    #main-page article {
         width: 100%;
         margin: 0;
         margin-bottom: 2px;
         box-shadow: 0 0 0;
         border-bottom: 1px #000 solid;
     }
+
+    #main-page article h1 {
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
+    #main-page article p {
+        margin-left: 2em;
+        margin-right: 2em;
+    }
+
+    .multisize-article-container article:first-child  .image-container{
+        width: 100%;
+        height: 30%;
+        float: none;
+    }
+
+    .multisize-article-container article:first-child h2 {
+        margin-left: 1em;
+        margin-right: 1em;
+        width: calc(100% - 2em);
+        float: none;
+        height: 20%;
+    }
+
+    .multisize-article-container article:first-child p {
+        margin-left: 2em;
+        width: calc(100% - 4em);
+        float: none; 
+        height: 30%;
+    }
+
+    .multisize-article-container article:first-child .author-name,
+    .multisize-article-container article:first-child .publication-date,
+    .multisize-article-container article:first-child .post-tags {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #article-list-page .article-list {
+        width: 100%;
+    }
+
+    #article-list-page .article-list article p {
+        padding-left: 2em;
+        width: calc(100% - 4em);
+    }
+
+    #article-list-page .article-list article .post-tags {
+        width: 100%; 
+    }
+
     .post-page article div {
         box-shadow: 0 0 0;
         border-top: #000 1px solid;
@@ -89,7 +153,7 @@
         width: 100%;
         border-radius: 0;
     }
-    .main-page .post-button {
+    #main-page .post-button {
         display: none;
     }
     .log-in-form {
@@ -112,6 +176,9 @@
     #filter-button, #button-add-post {
     bottom: 0.5em;
     }
+    footer p {
+        text-align: center;
+    }
 }
 
 @media (max-width: 1100px) and (min-width: 700px){
@@ -120,7 +187,7 @@
         max-width: 100em;
     }
 
-    .main-page article {
+    #main-page article {
         width: 49%;
         margin: 0.5%;
     }
@@ -155,5 +222,9 @@
 
     nav:hover .nav-buttons {
         display: block;
+    }
+
+    #article-list-page .article-list {
+        width: 100%;
     }
 }

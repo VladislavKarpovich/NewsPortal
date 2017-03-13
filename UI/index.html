@@ -2,7 +2,6 @@
 <html>
 
 <head>
-    <script type="text/javascript" src="js/scripts.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animation.css">
     <link rel="stylesheet" href="css/media.css">
@@ -11,12 +10,10 @@
 </head>
 
 <body>
-    <div id="overlay"></div>
-
     <div class="header-line">
         <header>
             <a class="logo" href="index.html">IT-News</a>
-            <div class="header-menu">          
+            <div class="header-menu">
                 <input type="text" placeholder="Поиск">
                 <nav>
                     <img src="img/book.png" alt="">
@@ -29,317 +26,114 @@
                         <button>Маркетинг</button>
                     </div>
                 </nav>
-                <button type="button" name="login" id="log-in-button">Войти</button>
-            </div> 
+                <div class="header-user-panel-container">
+                    <img src="img/user-iconW.png" alt="" id="log-in-button">
+                    <div class="header-user-panel" id="header-user-panel">
+                        <img src="img/user-icon.png" alt="" class="user-panel-image">
+                        <h1>User Name</h1>
+                        <p>usermail@mail.com</p>
+                        <button type="button" class="header-user-panel-button" href="#">Добавить новость</button>
+                        <button type="button" class="header-user-panel-button" href="#">Выйти</button>
+                    </div>
+                </div>
+            </div>
+            <img src="img/menu-icon.png" alt="menu" id="burger-menu-button">
         </header>
     </div>
 
+    <main>
+        <div id="main-page" class="main-page">
+            <h1>Последние новости</h1>
+            <section>
+                <div class="last-article-list multisize-article-container"></div>
+                <div class="clearfix"></div>
+            </section>
 
-    <main class="main-page">
-        <article>
-            <div class="image-container">
-                <img src="https://cdn.pixabay.com/photo/2015/05/26/23/52/technology-785742_960_720.jpg" alt="" class="post-image">
-            </div>
-            <div class="post-text-container">
+            <h1>Разработка</h1>
+            <section>
+                <div class="development-article-list"></div>
+                <div class="clearfix"></div>
+            </section>
 
-                <button type="button" class="post-button delete-button" href="#">
-              <img src="img/delete.png" class="button-image">
-            </button>
+            <h1>Администрирование</h1>
+            <section>
+                <div class="administration-article-list"></div>
+                <div class="clearfix"></div>
+            </section>
 
-                <button type="button" class="post-button edit-button" href="#">
-              <img src="img/pen.png" class="button-image">
-            </button>
-                <div class="post-name">New smartphone!!!1</div>
+            <h1>Дизайн</h1>
+            <section>
+                <div class="design-article-list"></div>
+                <div class="clearfix"></div>
+            </section>
 
-                <div class="short-discription">
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                </div>
-                <div class="author-name">Vlad Karpovich</div>
-                <div class="publication-date">09.02.2017</div>
-                <div class="post-tags">#smartphone #development</div>
-            </div>
-        </article>
-        <article>
-            <div class="image-container">
-                <img src="https://cdn.macrumors.com/article-new/2016/04/hp-spectre-1-800x449.jpg" alt="" class="post-image">
-            </div>
-            <div class="post-text-container">
-              <button type="button" class="post-button delete-button" href="#">
-                <img src="img/delete.png" class="button-image">
-              </button>
+            <h1>Управление</h1>
+            <section>
+                <div class="management-article-list"></div>
+                <div class="clearfix"></div>
+            </section>
 
-              <button type="button" class="post-button edit-button" href="#">
-                <img src="img/pen.png" class="button-image">
-              </button>
-                <div class="post-name">New smartphone!!!2</div>
+            <h1>Маркетинг</h1>
+            <section>
+                <div class="marketing-article-list"></div>
+                <div class="clearfix"></div>
+            </section>
+        </div>
 
-                <div class="short-discription">
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                </div>
-                <div class="author-name">Vlad Karpovich</div>
-                <div class="publication-date">09.02.2017</div>
-                <div class="post-tags">#smartphone #development</div>
-            </div>
-        </article>
-        <article>
-            <div class="image-container">
-                <img src="http://icdn2.digitaltrends.com/image/apple-macbook-gold-2015-back-angle-640x640.jpg" alt="" class="post-image">
-            </div>
-            <div class="post-text-container">
-              <button type="button" class="post-button delete-button" href="#">
-            <img src="img/delete.png" class="button-image">
-          </button>
-
-              <button type="button" class="post-button edit-button" href="#">
-            <img src="img/pen.png" class="button-image">
-          </button>
-                <div class="post-name">New smartphone!!!3</div>
-
-                <div class="short-discription">
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                </div>
-                <div class="author-name">Vlad Karpovich</div>
-                <div class="publication-date">09.02.2017</div>
-                <div class="post-tags">#smartphone #development</div>
-            </div>
-        </article>
-        <article>
-            <div class="image-container">
-                <img src="https://ttnstaticfile.blob.core.windows.net/static/ttn/media/logo/ttn-logo.png" alt="" class="post-image">
-            </div>
-            <div class="post-text-container">
-              <button type="button" class="post-button delete-button" href="#">
-            <img src="img/delete.png" class="button-image">
-          </button>
-
-              <button type="button" class="post-button edit-button" href="#">
-            <img src="img/pen.png" class="button-image">
-          </button>
-                <div class="post-name">New smartphone!!!41</div>
-
-                <div class="short-discription">
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                </div>
-                <div class="author-name">Vlad Karpovich</div>
-                <div class="publication-date">09.02.2017</div>
-                <div class="post-tags">#smartphone #development</div>
-            </div>
-        </article>
-        <article>
-            <div class="image-container">
-                <img src="https://cdn.pixabay.com/photo/2015/05/26/23/52/technology-785742_960_720.jpg" alt="" class="post-image">
-            </div>
-            <div class="post-text-container">
-              <button type="button" class="post-button delete-button" href="#">
-            <img src="img/delete.png" class="button-image">
-          </button>
-
-              <button type="button" class="post-button edit-button" href="#">
-            <img src="img/pen.png" class="button-image">
-          </button>
-                <div class="post-name">New smartphone!!!5</div>
-
-                <div class="short-discription">
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                </div>
-                <div class="author-name">Vlad Karpovich</div>
-                <div class="publication-date">09.02.2017</div>
-                <div class="post-tags">#smartphone #development</div>
-            </div>
-        </article>
-        <article>
-              <div class="image-container">
-                  <img src="http://www.ajnnews.com/wp-content/uploads/2013/04/Technology-Predictions-For-2013.jpg" alt="" class="post-image">
-              </div>
-              <div class="post-text-container">
-                <button type="button" class="post-button delete-button" href="#">
-              <img src="img/delete.png" class="button-image">
-            </button>
-
-                <button type="button" class="post-button edit-button" href="#">
-              <img src="img/pen.png" class="button-image">
-            </button>
-                  <div class="post-name">New smartphone!!!6</div>
-
-                  <div class="short-discription">
-                      Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                  </div>
-                  <div class="author-name">Vlad Karpovich</div>
-                  <div class="publication-date">09.02.2017</div>
-                  <div class="post-tags">#smartphone #development</div>
-              </div>
-        </article>
-        <article>
-            <div class="image-container">
-                <img src="http://thefutureofthings.com/upload/items_icons/DesCom_large.jpg" alt="" class="post-image">
-            </div>
-            <div class="post-text-container">
-              <button type="button" class="post-button delete-button" href="#">
-            <img src="img/delete.png" class="button-image">
-          </button>
-
-              <button type="button" class="post-button edit-button" href="#">
-            <img src="img/pen.png" class="button-image">
-          </button>
-                <div class="post-name">New smartphone!!!7</div>
-
-                <div class="short-discription">
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                </div>
-                <div class="author-name">Vlad Karpovich</div>
-                <div class="publication-date">09.02.2017</div>
-                <div class="post-tags">#smartphone #development</div>
-            </div>
-        </article>
-        <article>
-            <div class="image-container">
-                <img src="https://s-media-cache-ak0.pinimg.com/564x/ba/32/e2/ba32e2bfb941302d892234a28429e56f.jpg" alt="" class="post-image">
-            </div>
-            <div class="post-text-container">
-              <button type="button" class="post-button delete-button" href="#">
-            <img src="img/delete.png" class="button-image">
-          </button>
-
-              <button type="button" class="post-button edit-button" href="#">
-            <img src="img/pen.png" class="button-image">
-          </button>
-                <div class="post-name">New smartphone!!!8</div>
-
-                <div class="short-discription">
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                </div>
-                <div class="author-name">Vlad Karpovich</div>
-                <div class="publication-date">09.02.2017</div>
-                <div class="post-tags">#smartphone #development</div>
-            </div>
-        </article>
-        <article>
-              <div class="image-container">
-                  <img src="http://www.futuretimeline.net/subject/images/supercomputer-future-trends-2020.jpg" alt="" class="post-image">
-              </div>
-              <div class="post-text-container">
-                <button type="button" class="post-button delete-button" href="#">
-              <img src="img/delete.png" class="button-image">
-            </button>
-
-                <button type="button" class="post-button edit-button" href="#">
-              <img src="img/pen.png" class="button-image">
-            </button>
-                  <div class="post-name">New smartphone!!!9</div>
-
-                  <div class="short-discription">
-                      Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                  </div>
-                  <div class="author-name">Vlad Karpovich</div>
-                  <div class="publication-date">09.02.2017</div>
-                  <div class="post-tags">#smartphone #development</div>
-              </div>
-        </article>
-        <article>
-            <div class="image-container">
-                <img src="http://sixcolors.com/images/content/2015/macbook-portss-bleed.jpg" alt="" class="post-image">
-            </div>
-            <div class="post-text-container">
-              <button type="button" class="post-button delete-button" href="#">
-            <img src="img/delete.png" class="button-image">
-          </button>
-
-              <button type="button" class="post-button edit-button" href="#">
-            <img src="img/pen.png" class="button-image">
-          </button>
-
-                <div class="post-name">New smartphone!!!10</div>
-
-                <div class="short-discription">
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                </div>
-                <div class="author-name">Vlad Karpovich</div>
-                <div class="publication-date">09.02.2017</div>
-                <div class="post-tags">#smartphone #development</div>
-            </div>
-        </article>
-        <article>
-            <div class="image-container">
-                <img src="http://sixcolors.com/images/content/2015/macbook-portss-bleed.jpg" alt="" class="post-image">
-            </div>
-            <div class="post-text-container">
-              <button type="button" class="post-button delete-button" href="#">
-            <img src="img/delete.png" class="button-image">
-          </button>
-
-              <button type="button" class="post-button edit-button" href="#">
-            <img src="img/pen.png" class="button-image">
-          </button>
-
-                <div class="post-name">New smartphone!!!10</div>
-
-                <div class="short-discription">
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                </div>
-                <div class="author-name">Vlad Karpovich</div>
-                <div class="publication-date">09.02.2017</div>
-                <div class="post-tags">#smartphone #development</div>
-            </div>
-        </article>
-        <article>
-            <div class="image-container">
-                <img src="http://sixcolors.com/images/content/2015/macbook-portss-bleed.jpg" alt="" class="post-image">
-            </div>
-            <div class="post-text-container">
-              <button type="button" class="post-button delete-button" href="#">
-            <img src="img/delete.png" class="button-image">
-          </button>
-
-              <button type="button" class="post-button edit-button" href="#">
-            <img src="img/pen.png" class="button-image">
-          </button>
-
-                <div class="post-name">New smartphone!!!10</div>
-
-                <div class="short-discription">
-                    Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                </div>
-                <div class="author-name">Vlad Karpovich</div>
-                <div class="publication-date">09.02.2017</div>
-                <div class="post-tags">#smartphone #development</div>
-            </div>
-        </article>
-
-        <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a class="active" href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">&raquo;</a>
+        <div id="article-list-page" class="display-none">
+            <section class="article-list">
+            </section>
+            <div class="clearfix"></div>
+            <nav>
+            </nav>
         </div>
     </main>
 
-    <div class="clearfix">
-    </div>
-    </main>
-
     <footer>
-        DevNews 16.02.2017. Владислав Карпович. 2 курс, 5 группа.<br> vladislavkarpovich1@gmail.com
+        <h1>IT-News</h1>
+        <h6>16.02.2017</h6>
+        <p>Владислав Карпович. 2 курс, 5 группа. vladislavkarpovich1@gmail.com</p>
     </footer>
 
+    <!-- article template -->
+    <template id="template-article-item">
+        <article>
+            <div class="image-container">
+                <img src="http://sixcolors.com/images/content/2015/macbook-portss-bleed.jpg" alt="" class="post-image">
+            </div>
+            <div class="text-containers">
+                <h2>
+                    Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели 1
+                </h2>
+                <p>
+                    Проснувшись однажды утром после беспокойного сна, Грегор Замза обнаружил, что он у себя в постели превратился в страшное
+                    насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему приподнять голову.
+                </p>
+                <div class="clearfix"></div>
+            </div>
+            <div class="author-name">Vlad Karpovich</div>
+            <div class="publication-date">09.02.2017</div>
+            <div class="post-tags">Разработка</div>
+
+            <div class="article-item-buttons">
+                <button type="button" class="post-button delete-button" href="#"></button>
+                <button type="button" class="post-button edit-button" href="#"></button>
+            </div>
+        </article>
+    </template>
+
     <!-- forms -->
+    <div id="overlay"></div>
 
     <button type="button" id="filter-button" rel="filter-form" href="#">
       <img src="img/filter.png" class="button-image">
     </button>
 
-    <button type="button" name="button" id="button-add-post">
-      <img src="img/plus.png" class="button-image">
-    </button>
-
     <div class="filter-form tri-right" id="filter-form">
         <p>Фильтр</p>
         <label for="tags">Тэги:</label>
-        <input type="text" name="filter-tags" placeholder="#javascript #html #css">
-
+        <input type="text" name="filter-tags" placeholder="Разработка Маркетинг">
+        
         <label for="name">Имя автора:</label>
         <input type="text" name="filter-name" placeholder="Иван Петров">
 
@@ -357,5 +151,8 @@
         <input type="password" placeholder="пароль">
         <button id="login-form-button">OK</button>
     </form>
+
+    <script type="text/javascript" src="js/scripts.js"></script>
 </body>
+
 </html>
