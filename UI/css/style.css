@@ -81,7 +81,7 @@ nav button {
 
 header input {
     background: #E0F2F1;
-    color: #00695C;
+    color: #E0F2F1;
     border-radius: 10px;
     border: 0;
     width: 18rem;
@@ -158,8 +158,8 @@ header input {
 
 #burger-menu-button {
     background: transparent;
-    width: 2em;
-    margin: 1.5em;
+    width: 1.5em;
+    margin: 0.7em;
     float: right;
     border-style: none;
     cursor: pointer;
@@ -223,7 +223,7 @@ main {
     overflow: hidden;
     margin: 0.5%;
     width: calc(97%/3);
-    height: 32em;
+    height: 25em;
     float: left;
     cursor: pointer;
     float: left;
