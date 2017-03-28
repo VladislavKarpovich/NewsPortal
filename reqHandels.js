@@ -16,6 +16,10 @@ function getMimeType(url) {
 }
 
 function get(req, res) {
+	if(req.url === '/') {
+		req.url = '/index.html';
+	}
+	
     fs.readFile('./public' + req.url, function (err, data) {
         if (err) {
             console.error('file not found: ' + req.url);
