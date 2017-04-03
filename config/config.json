@@ -1,0 +1,12 @@
+{
+    "port": 3000,
+    "dataBaseFolder": "data",
+    "viewsFolder": "/public",
+    "viewArticlesDefaultAmount": 10,
+    "diskdb": {
+        "updateOptions": {
+            "multi": false,
+            "upsert": false
+        }
+    }
+}

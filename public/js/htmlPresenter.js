@@ -1,8 +1,9 @@
 ;
-var htmlController = (function () {
+var htmlPresenter = (function () {
+
   function convertToHTML(article) {
     var template = document.querySelector('#template-article-item');
-    template.content.querySelector('article').id = article.id;
+    template.content.querySelector('article').id = article._id;
     template.content.querySelector('.post-image').src = article.images[0];
     template.content.querySelector('h2').textContent = article.title;
     template.content.querySelector('p').textContent = article.shortDescription;
@@ -72,26 +73,7 @@ var htmlController = (function () {
     }
   }
 
-  function displayMainPage(lastArticles, developmentArticles, administrationArticles,
-    designArticles, managementArticles, marketingArticles) {
-    var container = document.getElementsByClassName('last-article-list')[0];
-    displayArticles(container, lastArticles);
-
-    container = document.getElementsByClassName('development-article-list')[0];
-    displayArticles(container, developmentArticles);
-
-    container = document.getElementsByClassName('administration-article-list')[0];
-    displayArticles(container, administrationArticles);
-
-    container = document.getElementsByClassName('design-article-list')[0];
-    displayArticles(container, designArticles);
-
-    container = document.getElementsByClassName('management-article-list')[0];
-    displayArticles(container, managementArticles);
-
-    container = document.getElementsByClassName('marketing-article-list')[0];
-    displayArticles(container, marketingArticles);
-
+  function displayMainPage() {
     document.getElementById('main-page').style.display = 'block';
     document.getElementById('article-list-page').style.display = 'none';
     document.getElementById('post-page').style.display = 'none';
@@ -122,31 +104,38 @@ var htmlController = (function () {
     document.getElementById('post-page').style.display = 'block';
   }
 
-  function displayPostPage(article) {
+  function displayPostPageForm(article) {
     var container = document.getElementById('post-page');
     var form = document.getElementById('edit-form');
 
-    container.querySelector('.article-detail-view').id = article.id;
+    container.querySelector('h1').textContent = article ? article.title : 'title';
+    form.postName.value = article ? article.title : '';
 
-    container.querySelector('h1').textContent = article.title;
-    form.postName.textContent = article.title;
-
-    container.querySelector('h6').textContent = article.shortDescription;
-    form.shortDiscription.textContent = article.shortDescription;
+    container.querySelector('h6').textContent = article ? article.shortDescription : 'description';
+    form.shortDiscription.value = article ? article.shortDescription : '';
 
     document.querySelector('#post-page .image-container').style.display = 'block';
-    initDetailViewImages(article.images);
 
-    container.querySelector('p').textContent = article.text;
-    form.text.textContent = article.text;
-    container.querySelector('.author-name').textContent = article.author;
-    container.querySelector('.publication-date').textContent = converttDateToString(article.createdAt);
+    initDetailViewImages(article ? article.images : ['../img/image-template.png']);
 
-    initDetailViewTags(article.tags);
+    container.querySelector('p').textContent = article ? article.text : 'text';
+    form.text.value = article ? article.text : '';
+    container.querySelector('.author-name').textContent = article ? article.author : '';
 
-    document.getElementById('main-page').style.display = 'none';
-    document.getElementById('article-list-page').style.display = 'none';
+    var date = article ? converttDateToString(article.createdAt) : converttDateToString(new Date());
+    container.querySelector('.publication-date').textContent = date;
+
+    initDetailViewTags(article ? article.tags : []);
+
     document.getElementById('post-page').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+    document.body.style.overflowY = 'hidden';
+  }
+
+  function hidePostPageForm() {
+    document.getElementById('overlay').style.display = 'none';
+    document.getElementById('post-page').style.display = 'none';
+    document.body.style.overflowY = '';
   }
 
   function initDetailViewImages(images) {
@@ -162,7 +151,6 @@ var htmlController = (function () {
       }
       document.getElementById('slides-container').innerHTML = slidesHtml;
       document.getElementById('dots-container').innerHTML = dotsHtml;
-      slider.init();
 
       document.querySelector('#post-page .image-container').style.display = 'block';
       document.getElementById('dots-container').style.display = 'block';
@@ -183,8 +171,28 @@ var htmlController = (function () {
 
   function initDetailViewTags(tags) {
     var tagsHtml = '';
+    var tagsCheckBoxes = document.querySelectorAll('.edit-form-tags input');
+    Array.prototype.forEach.call(tagsCheckBoxes, item => item.checked = false);
     tags.forEach(function (item) {
       tagsHtml += ' ' + item;
+      switch (item) {
+        case 'Разработка':
+          tagsCheckBoxes[0].checked = true;
+          break;
+        case 'Администрирование':
+          tagsCheckBoxes[1].checked = true;
+          break;
+        case 'Дизайн':
+          tagsCheckBoxes[2].checked = true;
+          break;
+        case 'Управление':
+          tagsCheckBoxes[3].checked = true;
+          break;
+        case 'Маркетинг':
+          tagsCheckBoxes[4].checked = true;
+          break;
+        default:
+      }
     });
     document.querySelector('#post-page .post-tags').textContent = tagsHtml;
   }
@@ -207,13 +215,13 @@ var htmlController = (function () {
     if (title) {
       form.querySelector('h1').textContent = title;
     }
-    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('message-overlay').style.display = 'block';
     form.style.display = 'block';
   }
 
   function hideErrorForm() {
     document.getElementById('error-form').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
+    document.getElementById('message-overlay').style.display = 'none';
   }
 
   function showExclamationForm(content, title) {
@@ -224,13 +232,13 @@ var htmlController = (function () {
     if (title) {
       form.querySelector('h1').textContent = title;
     }
-    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('message-overlay').style.display = 'block';
     form.style.display = 'block';
   }
 
   function hideExclamationForm() {
     document.getElementById('exclamation-form').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
+    document.getElementById('message-overlay').style.display = 'none';
   }
 
   function showMessageForm(content, title) {
@@ -241,13 +249,13 @@ var htmlController = (function () {
     if (title) {
       form.querySelector('h1').textContent = title;
     }
-    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('message-overlay').style.display = 'block';
     form.style.display = 'block';
   }
 
   function hideMessageForm() {
     document.getElementById('message-form').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
+    document.getElementById('message-overlay').style.display = 'none';
   }
 
   function userIn(user) {
@@ -324,17 +332,47 @@ var htmlController = (function () {
     if (amount > 1) {
       var html = '';
       for (var i = 0; i < amount; i++) {
-        html += '<a href="#">' + (i + 1) + '</a>';
+        html += '<a>' + (i + 1) + '</a>';
       }
       document.querySelector('#pagination .pages').innerHTML = html;
+      document.getElementById('pagination').style.display = 'block';
+    } else {
+      document.getElementById('pagination').style.display = 'none';
     }
+  }
+
+  function activatePaginationButton(number, max) {
+    document.querySelectorAll('#pagination .pages .active').className = '';
+    document.querySelectorAll('#pagination .pages a')[number].className = 'active';
+    if (number === 0) {
+      document.getElementById('prev-page').style.display = 'none';
+    } else {
+      document.getElementById('prev-page').style.display = 'block';
+    }
+
+    if (number === max) {
+      document.getElementById('next-page').style.display = 'none';
+    } else {
+      document.getElementById('next-page').style.display = 'block';
+    }
+  }
+
+  function hideOverlay() {
+    document.getElementById('overlay').style.display = 'none';
+  }
+
+  function removeAllEventListeners(id) {
+    var old_element = document.getElementById(id);
+    var new_element = old_element.cloneNode(true);
+    old_element.parentNode.replaceChild(new_element, old_element);
   }
 
 
   return {
     displayArticleList: displayArticleList,
     displayMainPage: displayMainPage,
-    displayPostPage: displayPostPage,
+    displayPostPageForm: displayPostPageForm,
+    displayArticles: displayArticles,
     addDetailViewFormImageBlock: addDetailViewFormImageBlock,
     addArticle: addArticle,
     removeArticle: removeArticle,
@@ -353,6 +391,9 @@ var htmlController = (function () {
     activateHeaderButton: activateHeaderButton,
     addAuthorsInFilter: addAuthorsInFilter,
     addPagination: addPagination,
-    displayAddPostPage: displayAddPostPage
+    displayAddPostPage: displayAddPostPage,
+    activatePaginationButton: activatePaginationButton,
+    hidePostPageForm: hidePostPageForm,
+    hideOverlay: hideOverlay
   }
 }());

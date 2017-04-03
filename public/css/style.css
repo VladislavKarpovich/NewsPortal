@@ -22,7 +22,7 @@ body {
     clear: both;
 }
 
-#overlay {
+#overlay, #message-overlay {
     display: none;
     width: 100%;
     height: 100%;
@@ -32,6 +32,10 @@ body {
     z-index: 30;
     background: #000;
     opacity: 0.8;
+}
+
+#message-overlay {
+    z-index: 170;
 }
 
 /* header */
@@ -184,8 +188,6 @@ header input {
     display: none;
 }
 
-/* button */
-
 /* main page */
 main {
     margin-top: 5.5em;
@@ -215,12 +217,11 @@ main {
 }
 
 .main-page article {
+    width: 24%;
+    height: 30em;
     overflow: hidden;
     margin: 0.5%;
-    width: calc(97%/3);
-    height: 25em;
     float: left;
-    cursor: pointer;
     float: left;
 }
 
@@ -249,6 +250,11 @@ main {
     text-align: justify;
     font-size: 1.1em;
     font-family: Calibri Light;
+    cursor: pointer;
+}
+
+.main-page article h2:hover {
+    color:#00897B;
 }
 
 .main-page article p {
@@ -273,64 +279,15 @@ main {
 
 .main-page .post-tags {
     padding-right: 0;
-}
-
-
-.multisize-article-container article:first-child {
-    width: 100%;
-    height: 30em;
-}
-
-.multisize-article-container article:first-child  .image-container{
-    width: 65%;
-    height: 100%;
-    overflow: hidden;
-    float: left;
-}
-
-.multisize-article-container article:first-child .text-containers {
-    height: 80%;
-}
-
-.multisize-article-container article:first-child h2 {
-    color: #212121;
-    text-align: justify;
-    margin-top: 0;
-    padding-top: 0;
-    font-size: 1.2em;
-    margin-left: 66%;
-    margin-right: 1%;
-    height: 30%;
-}
-
-.multisize-article-container article:first-child p {
-    color: #212121;
-    margin-left: 68%;
-    margin-right: 3%;
-    text-align: justify;
-}
-
-.multisize-article-container article:first-child .author-name,
-.multisize-article-container article:first-child .publication-date,
-.multisize-article-container article:first-child .post-tags {
-    color: #999;
-    float: right;
-    margin-right: 0%;
-    width: 30%;
-    text-align: right;
-}
-
-.multisize-article-container article:first-child .post-tags {
-    text-align: center;
-}
+}   
 
 .multisize-article-container article {
-    width: 24%;
-    height: 30em;
+    width: calc(97%/3);
+    height: 35em;
 }
 
 .multisize-article-container article .image-container {
-    height: 30%;
+    height: 45%;
 }
 
 .multisize-article-container article p {
@@ -382,7 +339,6 @@ main {
     float: left;
     border-bottom: 2px #00695C solid; 
     margin-top: 1em;
-    cursor: pointer;
 }
 
 #article-list-page .article-list article .image-container {
@@ -397,6 +353,11 @@ main {
     float: left;
     font-size: 22px;
     font-family: Calibri Light;
+    cursor: pointer;
+}
+
+#article-list-page .article-list article h2:hover {
+    color: #00897B;
 }
 
 #article-list-page .article-list article p {
@@ -469,11 +430,32 @@ main {
 /* article detail view, edit page */
 #post-page {
     overflow: hidden;
-    width: 97%;
-    margin: 0.5%;
+    position: fixed;
+    top: 1em;
+    bottom: 1em;
+    width: 90%;
+    left: 5%;
+    margin: auto;
     padding: 1%;
     font-size: 1em;
     display: none;
+    z-index: 150;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+    background: #FFF;
+    overflow: scroll;
+}
+
+#close-post-page-button {
+    padding: 0.25em;
+    float: right;
+    height: 1.5em;
+    width: 1.5em;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    background-size: 100% 100%;
+    background-image: url(../img/close.png);
+    cursor: pointer;
 }
 
 #post-page h1 {
@@ -593,6 +575,8 @@ main {
     font-size: 14px;
 }
 
+
+
 #edit-form h1 {
     padding-left: 2em;
     font-size: 1.8em;
@@ -641,15 +625,31 @@ main {
     display: inline;
 }
 
-#edit-form input {
+#edit-form input[type='text'] {
     width: calc(96% - 2.3em);
     margin-left: 1em;
     height: 3em;
 }
 
 #edit-form .wrong {
-    border: 4px solid #F44336;
-    border-radius: 7px;
+    border: 2px solid #F44336;
+    border-radius: 4px;
+}
+
+.edit-form-tags label {
+    margin: 0.1em;
+    color: #00695C;
+    float: left;
+    padding: 0 2em;
+    font-size: 14px;
+    text-align: left;
+    height: 2em;
+}
+
+.edit-form-tags input[type="checkbox"]{
+    display: inline;
+    float: left;
+    margin: 1em;
 }
 
 .delete-image-input-button {
@@ -899,10 +899,11 @@ footer h6, footer h1 {
     box-sizing: border-box;
     font-size: 14px;
     position: fixed;
-    z-index: 100;
+    z-index: 200;
     padding: 1em;
     background: #FAFAFA;
     display: none;
+    border: 2px #00695C solid;
 }
 
 .lmessage-form  h1 {

@@ -19,13 +19,13 @@
                 <nav>
                     <img src="img/book.png" alt="">
                     <div class="nav-buttons">
-                        <button>Главная</button>
-                        <button>Последние</button>
-                        <button>Разработка</button>
-                        <button>Администрирование</button>
-                        <button>Дизайн</button>
-                        <button>Управление</button>
-                        <button>Маркетинг</button>
+                        <button class="header-tag-button">Главная</button>
+                        <button class="header-tag-button">Последние</button>
+                        <button class="header-tag-button">Разработка</button>
+                        <button class="header-tag-button">Администрирование</button>
+                        <button class="header-tag-button">Дизайн</button>
+                        <button class="header-tag-button">Управление</button>
+                        <button class="header-tag-button">Маркетинг</button>
                     </div>
                 </nav>
                 <div class="header-user-panel-container">
@@ -87,56 +87,10 @@
             </section>
             <div class="clearfix"></div>
             <nav id="pagination">
-                <a href="#" id="prev-page">&laquo;</a>
+                <a id="prev-page">&laquo;</a>
                 <span class="pages"></span>
-                <a href="#" id="next-page">&raquo;</a>
+                <a id="next-page">&raquo;</a>
             </nav>
-        </div>
-
-        <div id="post-page">
-            <div class="article-detail-view">
-                <h1></h1>
-                <h6></h6>
-                <div class="image-container">
-                    <div id="slides-container"></div>
-                    <a id="prev-button">&#10094;</a>
-                    <a id="next-button">&#10095;</a>
-                </div>
-                <br>
-                <div id="dots-container"></div>
-                <p></p>
-                <div class="author-name"></div>
-                <div class="publication-date"></div>
-                <div class="post-tags"></div>
-            </div>
-
-            <form id="edit-form">
-                <h1>Редактор</h1>
-                <label for="postName">Заглавие:</label>
-                <textarea type="text" name="postName" placeholder="Заглавие(до 100 символов)"></textarea>
-
-                <label for="shortDiscription">Краткое описание:</label>
-                <textarea type="text" name="shortDiscription" placeholder="Краткое описание(до 200 символов)" rows='5'></textarea>
-
-                <div>
-                    <label for="images">Изображения</label>
-                    <div id="edit-form-images-container">
-
-                    </div>
-                    <div id="edit-form-add-image-button">
-                        <button type="button"></button>
-                        <div class="tooltip">
-                            Добавить изображение
-                        </div>
-                    </div>
-                </div>
-                <label for="text">Текст:</label>
-                <textarea type="text" name="text" placeholder="Полное описание" rows='25'></textarea>
-
-                <button type="button" id="editing-save-button" class="edit-form-button">Сохранить</button>
-                <button type="button" id="editing-delete-button" class="edit-form-button">Удалить</button>
-            </form>
-
         </div>
     </main>
 
@@ -161,6 +115,7 @@
             <div class="publication-date"></div>
             <div class="post-tags"></div>
 
+            <button class="show-more-article-button">Показать</button>
         </article>
     </template>
 
@@ -173,6 +128,67 @@
 
     <!-- forms -->
     <div id="overlay"></div>
+    <div id="message-overlay"></div>
+
+    <div id="post-page">
+        <button id="close-post-page-button"></button>
+        <div class="article-detail-view">
+            <h1></h1>
+            <h6></h6>
+            <div class="image-container">
+                <div id="slides-container"></div>
+                <a id="prev-button">&#10094;</a>
+                <a id="next-button">&#10095;</a>
+            </div>
+            <br>
+            <div id="dots-container"></div>
+            <p></p>
+            <div class="author-name"></div>
+            <div class="publication-date"></div>
+            <div class="post-tags"></div>
+        </div>
+
+        <form id="edit-form">
+            <h1>Редактор</h1>
+            <label for="postName">Заглавие:</label>
+            <textarea type="text" name="postName" placeholder="Заглавие(до 100 символов)"></textarea>
+
+            <label for="shortDiscription">Краткое описание:</label>
+            <textarea type="text" name="shortDiscription" placeholder="Краткое описание(до 200 символов)" rows='5'></textarea>
+
+            <div>
+                <label for="images">Изображения</label>
+                <div id="edit-form-images-container">
+
+                </div>
+                <div id="edit-form-add-image-button">
+                    <button type="button"></button>
+                    <div class="tooltip">
+                        Добавить изображение
+                    </div>
+                </div>
+            </div>
+            <label for="text">Текст:</label>
+            <textarea type="text" name="text" placeholder="Полное описание" rows='25'></textarea>
+
+            <div class="edit-form-tags">
+                <label><input type="checkbox">Разработка</label>
+                <label><input type="checkbox">Администрирование</label>
+                <label><input type="checkbox">Дизайн</label>
+                <label><input type="checkbox">Управление</label>
+                <label><input type="checkbox">Маркетинг</label>
+                <div class="clearfix"></div>
+            </div>
+
+            <div>
+                <button type="button" id="editing-save-button" class="edit-form-button">Сохранить</button>
+                <button type="button" id="editing-delete-button" class="edit-form-button">Удалить</button>
+                <div class="clearfix"></div>
+            </div>
+
+        </form>
+
+    </div>
 
     <div id="filter-button">
         <img src="img/filter.png" class="button-image">
@@ -228,14 +244,12 @@
         <button type="button" id="message-form-ok-button">OK</button>
     </form>
 
-
-
-    <script type="text/javascript" src="js/articlesDataPresenter.js"></script>
-    <script type="text/javascript" src="js/slider.js"></script>
-    <script type="text/javascript" src="js/htmlController.js"></script>
-    <script type="text/javascript" src="js/articleListController.js"></script>
-    <script type="text/javascript" src="js/articleEditForm.js"></script>
-    <script type="text/javascript" src="js/handels.js"></script>
+    <script type="text/javascript" src="js/htmlPresenter.js"></script>
+    <script type="text/javascript" src="js/requests.js"></script>
+    <script type="text/javascript" src="js/userController.js"></script>
+    <script type="text/javascript" src="js/sliderController.js"></script>
+    <script type="text/javascript" src="js/articlesController.js"></script>
+    <script type="text/javascript" src="js/articleFormController.js"></script>
     <script type="text/javascript" src="js/scripts.js"></script>
 
 </body>
