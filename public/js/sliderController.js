@@ -9,8 +9,7 @@ var sliderController = (function () {
         }
 
         var dots = document.getElementsByClassName("dot");
-        (n > slides.length) ? slideIndex = 1 : slideIndex = slideIndex;
-        (n < 1) ? slideIndex = slides.length : slideIndex = slideIndex;
+        slideIndex = (n > slides.length) ? 1 : (n < 1) ? slides.length : slideIndex;
 
         for (let i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";
