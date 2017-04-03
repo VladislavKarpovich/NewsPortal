@@ -4,21 +4,20 @@ var sliderController = (function () {
 
     function showSlides(n) {
         var slides = document.getElementsByClassName("slides");
-        if (slides.length) {
-            var dots = document.getElementsByClassName("dot");
-            if (n > slides.length) {
-                slideIndex = 1
-            }
-            if (n < 1) {
-                slideIndex = slides.length
-            }
-            for (var i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-                dots[i].classList.remove("active");
-            }
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " active";
+        if (!slides.length) {
+            return;
         }
+
+        var dots = document.getElementsByClassName("dot");
+        (n > slides.length) ? slideIndex = 1 : slideIndex = slideIndex;
+        (n < 1) ? slideIndex = slides.length : slideIndex = slideIndex;
+
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+            dots[i].classList.remove("active");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
     }
 
     function showSlide_Handel(event) {

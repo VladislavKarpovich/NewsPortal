@@ -253,10 +253,6 @@ main {
     cursor: pointer;
 }
 
-.main-page article h2:hover {
-    color:#00897B;
-}
-
 .main-page article p {
     margin: 0.5em;
     font-size: 0.9em;
@@ -354,10 +350,6 @@ main {
     font-size: 22px;
     font-family: Calibri Light;
     cursor: pointer;
-}
-
-#article-list-page .article-list article h2:hover {
-    color: #00897B;
 }
 
 #article-list-page .article-list article p {
