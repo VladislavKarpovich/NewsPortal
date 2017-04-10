@@ -1,0 +1,75 @@
+article {
+    overflow: hidden;
+    margin: 0.5%;
+    float: left;
+}
+
+article h2 {
+    margin: 0.5em;
+    padding-bottom: 0;
+    padding-top: 0.5em;
+    text-align: justify;
+    font-size: 1.1em;
+    font-family: Calibri Light;
+    cursor: pointer;
+}
+
+article .image-container {
+    overflow: hidden;
+}
+
+article .post-image {
+    width: 100%;
+}
+
+article p {
+    margin: 0.5em;
+    font-size: 0.9em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.publication-date,
+.author-name,
+.post-tags {
+    height: 3%;
+    width: 100%;
+    padding-right: 1em;
+    text-align: right;
+    font-size: 0.7em;
+    text-decoration: none;
+    color: #999;
+    float: right;
+}
+
+.post-tags {
+    padding-right: 0;
+} 
+
+
+.main-page .publication-date {
+    font-style: italic;
+}
+
+.main-page .post-tags {
+    text-align: center;
+}
+
+
+.show-more-article-button {
+    background: transparent;
+    color: #00695C;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    padding: 0.4em 1.25em;
+    border-radius: 10px;
+    float: right;
+    cursor: pointer;
+    margin: 1em;
+}
+
+.show-more-article-button:hover {
+    background: #00695C;
+    color: #FFF; 
+}

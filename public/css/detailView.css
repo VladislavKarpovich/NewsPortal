@@ -1,0 +1,135 @@
+#post-page {
+    overflow: hidden;
+    position: fixed;
+    top: 1em;
+    bottom: 1em;
+    width: 90%;
+    left: 5%;
+    margin: auto;
+    padding: 1%;
+    font-size: 1em;
+    display: none;
+    z-index: 150;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+    background: #FFF;
+    overflow: scroll;
+}
+
+#close-post-page-button {
+    padding: 0.25em;
+    float: right;
+    height: 1.5em;
+    width: 1.5em;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    background-size: 100% 100%;
+    background-image: url(../img/close.png);
+    cursor: pointer;
+}
+
+#post-page h1 {
+    padding-left: 2em;
+    font-size: 1.8em;
+    border-bottom: 2px #00695C solid;
+    color: #00695C;
+    margin-top: 0;
+}
+
+#post-page h6 {
+    font-size: 18px;
+    font-family: "Roboto", sans-serif;
+    font-style: inherit;
+}
+
+#post-page .image-container {
+  width: 80%;
+  margin-left: 10%;
+  height: 27em;
+  overflow: hidden;
+  position: relative;
+}
+
+#prev-button, #next-button {
+  position: absolute;
+  cursor: pointer;
+  top: calc(50% - 25px);
+  padding: 16px;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s;
+}
+
+#prev-button {
+  left: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+#next-button {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+#next-button:hover, #prev-button:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+#dots-container {
+ text-align: center;
+}
+
+.dot {
+  cursor: pointer;
+  height: 13px;
+  width: 13px;
+  margin: 0 2px;
+  background-color: #bbb;
+  color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  transition: 0.6s;
+}
+
+.active, .dot:hover {
+  background-color: #00897B;
+}
+
+#post-page img {
+    width: 100%;
+}
+
+#post-page .author-name, #post-page .publication-date {
+    width: 47%;
+    margin: 0.5%;
+    padding: 1%;
+    float: left;
+    text-align: center;
+}
+
+#post-page .post-tags {
+    text-align: center;
+    font-size: 0.8em;
+}
+
+#post-page .post-button {
+    outline: 0;
+    border: 0;
+    height: 1em;
+    width: 1em;
+    cursor: pointer;
+    float: right;
+    margin: 0.3em;
+    background-size: cover;
+    background-color: transparent;
+}
+
+#post-page .delete-button {
+    height: 1.3em;
+    width: 1.3em;
+    background-image: url(../img/delete.png);
+}
+
+#post-page .edit-button {
+    background-image: url(../img/pen.png);
+}

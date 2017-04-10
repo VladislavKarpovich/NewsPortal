@@ -1,0 +1,40 @@
+.main-page section {
+    margin-bottom: 0.5em;
+    margin-top: 0;
+}
+
+.main-page h1 {
+    padding-left: 2em;
+    font-size: 1.8em;
+    border-bottom: 2px #00695C solid;
+    color: #00695C;
+    cursor: pointer;
+    margin-top: 0;
+}
+
+.main-page article {
+    width: 19%;
+    height: 32em;
+}
+
+.main-page article .image-container {
+    width: 100%;
+    height: 40%;
+}
+
+.main-page .text-containers {
+    height: 30%;
+}  
+
+.multisize-article-container article {
+    width: 24%;
+    height: 35em;
+}
+
+.multisize-article-container article .image-container {
+    height: 45%;
+}
+
+.multisize-article-container article p {
+    height: 30%;
+}

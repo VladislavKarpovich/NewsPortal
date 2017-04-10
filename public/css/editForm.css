@@ -1,0 +1,110 @@
+#edit-form {
+    width: 100%;
+    margin: 0.5%;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#edit-form h1 {
+    padding-left: 2em;
+    font-size: 1.8em;
+    border-bottom: 2px #00695C solid;
+    color: #00695C;
+    cursor: pointer;
+    margin-top: 0;
+}
+
+#edit-form input, #edit-form textarea {
+    outline: 0;
+    border: 0;
+    background: #E0E0E0;
+    width: 98%;
+    margin: 1%;
+    padding: 1em;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#edit-form-add-image-button {
+    display: inline;
+}
+
+#edit-form-add-image-button button {
+    background-image: url(../img/plus.png);
+    background-color: transparent;
+    width: 1.3em;
+    height: 1.3em;
+    margin: 1em;
+    margin-left: 2em;
+}
+
+#edit-form-add-image-button .tooltip {
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    padding: 1em;
+    display: none;
+    float: left;
+    position: absolute;
+    cursor: pointer;
+}
+
+#edit-form-add-image-button:hover .tooltip {
+    display: inline;
+}
+
+#edit-form input[type='text'] {
+    width: calc(96% - 2.3em);
+    margin-left: 1em;
+    height: 3em;
+}
+
+#edit-form .wrong {
+    border: 2px solid #F44336;
+    border-radius: 4px;
+}
+
+.edit-form-tags label {
+    margin: 0.1em;
+    color: #00695C;
+    float: left;
+    padding: 0 2em;
+    font-size: 14px;
+    text-align: left;
+    height: 2em;
+}
+
+.edit-form-tags input[type="checkbox"]{
+    display: inline;
+    margin: 1em;
+}
+
+.delete-image-input-button {
+    width: 1.3em;
+    height: 1.3em;    
+    background-image: url(../img/delete.png);
+    background-color: transparent;
+}
+
+#edit-form button {
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    background-size: cover;
+}
+
+
+#edit-form .edit-form-button {
+    width: 49%;
+    color: #FFF;
+    background: #00695C;
+    font-size: 20px;
+    padding: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin: 0.5%;
+    float: left;
+}

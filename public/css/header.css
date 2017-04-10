@@ -1,0 +1,129 @@
+header {
+    max-width: 85em;
+    height: 4em;
+    margin: 0 auto;
+}
+
+.logo {
+    color: #FFF;
+    padding: 0.5em;
+    padding-top: 0.3em;
+    font-size: 2.5em;
+    letter-spacing: -1px;
+    text-decoration: none;
+    float: left;
+}
+
+#header-menu nav {
+    float: left;
+    margin-top: 2em;
+    margin-left: 1em;
+}
+
+nav img {
+    margin-top: -0.2em;
+    width: 2em;
+    height: 2em;
+    display: none;
+}
+
+nav button {
+    background: transparent;
+    text-align: center;
+    border-style: none;
+    color: #B2DFDB;
+    cursor: pointer;
+    outline-style: none;
+}
+
+nav .active-button {
+     color: #FFF;
+     text-decoration: underline';
+}
+
+header input {
+    background: #E0F2F1;
+    border-radius: 10px;
+    border: 0;
+    width: 18rem;
+    margin-top: 1.8em;
+    margin-left: 1em;
+    padding: 0.5em;
+    padding-left: 1em;
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: none; 
+    float: left;   
+}
+
+#log-in-button {
+    float: right;
+    width: 2.5em;
+    height: 2.5em;
+    margin: 1.25em;
+    cursor: pointer;
+}
+
+.header-user-panel {
+    position: absolute;
+    right: 2em;
+    top: 3em;
+    width: 15em;
+    height: 16em;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    display: none;
+}
+
+.header-user-panel-container:hover .header-user-panel {
+    display: block;
+}
+
+.header-user-panel h1 {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.header-user-panel p {
+    font-size: 12px;
+    text-align: center;
+    margin: 0;
+}
+
+.header-user-panel .user-panel-image {
+    width: 5em;
+    height: 5em;
+    margin: 5em;
+    margin-bottom: 0.5em;
+    margin-top: 2em;
+    border-radius: 2.5em;
+    border: 0px;
+}
+
+.header-user-panel .header-user-panel-button {
+    outline: 0;
+    border: 0;
+    background: #00695C;
+    color: #FFF;
+    font-size: 14px;
+    height: 2.3em;
+    width: calc(100% - 2em);
+    cursor: pointer;
+    margin: 1em;
+    margin-bottom: 0.2em;
+    margin-top: 0.2em;
+    display: block;
+}
+
+#burger-menu-button {
+    background: transparent;
+    width: 1.5em;
+    margin: 0.7em;
+    float: right;
+    border-style: none;
+    cursor: pointer;
+    outline-style: none;
+    display: none;
+}

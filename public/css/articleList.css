@@ -1,0 +1,79 @@
+#article-list-page {
+    margin-bottom: 6em;
+}
+
+#article-list-page .article-list {
+    margin: 0 auto;
+    max-width: 70em;
+}
+
+#article-list-page .article-list article {
+    width: 100%;
+    float: left;
+    border-bottom: 2px #00695C solid; 
+    margin-top: 1em;
+}
+
+#article-list-page .article-list article .image-container {
+    width: 40%;
+    float: left;
+}
+
+#article-list-page .article-list article h2 {
+    margin: 0;
+    padding-left: 1em;
+    width: calc(60% - 2em);
+    float: left;
+    font-size: 22px;
+    font-family: Calibri Light;
+    cursor: pointer;
+}
+
+#article-list-page .article-list article p {
+    padding-left: 2em;
+    width: calc(60% - 4em);
+    float: left;
+    font-size: 14px;
+}
+
+#article-list-page .article-list article .author-name,
+#article-list-page .article-list article .publication-date, 
+#article-list-page .article-list article .post-tags {
+    height: 4%;
+    width: 60%;
+    float: right;
+    text-align: right;
+}
+
+#article-list-page .article-list article .post-tags {
+    text-align: center;
+}
+
+
+#article-list-page .show-more-article-button {
+    float: right;
+}
+
+#pagination {
+    margin-left: 35%;
+    display: block;
+}
+
+#pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#pagination a.active {
+    background-color: #00897B;
+    color: white;
+
+}
+
+#pagination a:hover:not(.active) {
+    background-color: transparent;
+}
