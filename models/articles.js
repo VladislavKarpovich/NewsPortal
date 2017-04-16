@@ -1,54 +1,67 @@
 const config = require('../config');
-const db = require('diskdb');
+const db = require('../db').GetArticleDB();
+const articlesIndexes = require('../dataAccessLevel');
 
-db.connect(config.get('dataBaseFolder'));
-db.loadCollections(['articles']); 
+(function () {
+  const articles = db.find();
+  articlesIndexes.init(articles);
+}());
 
-exports.getArticles = function (skip, amount, filter) {
-    const articlesArray = filterArticles(filter);
-    articlesArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    return {
-        articles: articlesArray.slice(skip, skip + amount),
-        amount: articlesArray.length
-    };
-};
+function dateFilter(dateFrom, dateTo, articles) {
+  if ((!dateFrom || dateFrom == 'Invalid Date') &&
+    (!dateTo || dateTo == 'Invalid Date')) return articles;
 
-function filterArticles(filter) {
-    if (!filter) {
-        return db.articles.find();
-    }
+  return articles.filter((article) => {
+    const createdAt = new Date(article.createdAt);
 
-    return db.articles.find().filter((item) => {
-        if (filter.tags) {
-            for (let i = 0; i < filter.tags.length; i++) {
-                if (item.tags.indexOf(filter.tags[i]) === -1) { return false; }
-            }
-        }
-        if (filter.author) {
-            if (item.author !== filter.author) { return false; }
-        }
-        if (filter.dateFrom && filter.dateFrom.toString() !== 'Invalid Date') {
-            if (filter.dateFrom > item.createdAt) { return false; }
-        }
-        if (filter.dateTo && filter.dateTo.toString() !== 'Invalid Date') {
-            if (filter.dateTo < item.createdAt) { return false; }
-        }
-        return true;
-    });
+    if ((dateFrom && dateFrom != 'Invalid Date') &&
+      (dateFrom > createdAt)) return false;
+
+    if ((dateTo && dateTo != 'Invalid Date') &&
+      (dateTo < createdAt)) return false;
+
+    return true;
+  });
 }
 
-exports.getArticleById = function getArticle(id) {
-    return db.articles.findOne({ _id: id });
-};
+function getArticles(skip, amount, filter) {
+  const ids = articlesIndexes.filterArticlesIds(filter);
+  let articles = ids ? ids.map(id => db.findOne({ _id: id })) : db.find();
+  articles = dateFilter(filter.dateFrom, filter.dateTo, articles);
+  articles.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-exports.removeArticle = function (id) {
-    return db.articles.remove({ _id: id });
-};
+  return {
+    articles: articles.slice(skip, skip + amount),
+    amount: articles.length,
+  };
+}
 
-exports.addArticle = function (article) {
-    return db.articles.save(article);
-};
+function getArticleById(id) {
+  return db.findOne({ _id: id });
+}
 
-exports.editArticle = function (id, article) {
-    return db.articles.update({ _id: id }, article, { multi: false, upsert: false });
+function removeArticle(id) {
+  const article = db.articles.remove({ _id: id });
+  articlesIndexes.deleteArticleIds(article);
+  return db.remove({ _id: id });
+}
+
+function addArticle(article) {
+  const savedArticle = db.save(article);
+  articlesIndexes.createArticleIds(article);
+}
+
+function editArticle(id, article) {
+  const oldArticle = db.findOne({ _id: id });
+  articlesIndexes.updateArticleIds(oldArticle, article);
+  const updateOptions = { multi: false, upsert: false };
+  return db.update({ _id: id }, article, updateOptions);
+}
+
+module.exports = {
+  getArticles,
+  getArticleById,
+  removeArticle,
+  addArticle,
+  editArticle,
 };

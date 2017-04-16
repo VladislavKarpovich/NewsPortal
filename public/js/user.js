@@ -22,7 +22,7 @@
 
   function userOutHandel() {
     const articlesButtons = heyClassName('article-item-buttons');
-    for (let i = 0; i < articlesButtons.length; i++) {
+    for (let i = 0; i < articlesButtons.length; i += 1) {
       articlesButtons[i].style.display = 'none';
     }
 

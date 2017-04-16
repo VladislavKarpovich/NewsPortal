@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + config.get('viewsFolder')));
 
 app.get('/', (req, res) => {
-    res.send('index.html');
+  res.send('index.html');
 });
 
 app.get('/articles', articles.getArticles);
@@ -20,13 +20,13 @@ app.put('/article/:id', articles.editArticle);
 app.delete('/article/:id', articles.deleteElement);
 
 app.use((req, res) => {
-    res.send(404, 'Page not found');
-    log.error(`Page not found ${req.url}`);
+  res.send(404, 'Page not found');
+  log.error(`Page not found ${req.url}`);
 });
 
 app.use((err, req, res, next) => {
-    res.send(500, 'Server error');
-    log.error(err);
+  res.send(500, 'Server error');
+  log.error(err);
 });
 
 app.listen(config.get('port'), () => log.info(`listening port ${config.get('port')}`));
