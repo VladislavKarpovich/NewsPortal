@@ -10,7 +10,8 @@
         "no-param-reassign": "off",
         "no-underscore-dangle": "off",
         "no-useless-return": "off",
-        "eqeqeq": "off"
+        "eqeqeq": "off",
+        "comma-dangle": "off"
     },
     "globals": {
         "document": false,

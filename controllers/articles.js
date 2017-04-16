@@ -2,42 +2,60 @@ const articlesModel = require('../models/articles');
 const log = require('winston');
 const config = require('../config');
 
-exports.getArticles = function (req, res) {
-  const filter = {
-    tags: req.query.tags ? req.query.tags.split(',') : [],
-    author: req.query.author,
-    dateFrom: new Date(req.query.dateFrom),
-    dateTo: new Date(req.query.dateTo),
+function parseQuery(query) {
+  return {
+    skip: Number(query.skip) || 0,
+    amount: Number(query.amount) || config.get('viewArticlesDefaultAmount'),
+    filter: {
+      tags: query.tags ? query.tags.split(',') : [],
+      author: query.author,
+      dateFrom: new Date(query.dateFrom),
+      dateTo: new Date(query.dateTo),
+    },
   };
-  const skip = Number(req.query.skip) || 0;
-  const amount = Number(req.query.amount) || config.get('viewArticlesDefaultAmount');
+}
 
-  log.info(filter);
-  log.info(`skip: ${skip}`);
-  log.info(`amount: ${amount}`);
+function getArticles(req, res) {
+  const q = parseQuery(req.query);
+  articlesModel.getArticles(q.skip, q.amount, q.filter).then(
+    answer => res.status(200).send(answer),
+    () => res.sendStatus(404)
+  );
+}
 
-  res.json(articlesModel.getArticles(skip, amount, filter));
-};
+function findById(req, res) {
+  articlesModel.getArticleById(req.params.id).then(
+     artile => res.status(200).send(artile),
+     () => res.sendStatus(404)
+   );
+}
 
-exports.findById = function (req, res) {
-  res.send(200, articlesModel.getArticleById(req.params.id));
-};
-
-exports.addArticle = function (req, res) {
-  articlesModel.addArticle(req.body);
+function addArticle(req, res) {
+  articlesModel.addArticle(req.body).then(
+    () => res.sendStatus(200),
+    () => res.sendStatus(400)
+  );
   res.send(200);
-};
+}
 
-exports.editArticle = function (req, res) {
-  const result = articlesModel.editArticle(req.params.id, req.body);
-  if (result.updated === 1) {
-    res.sendStatus(200);
-  } else {
-    res.sendStatus(204);
-  }
-};
+function editArticle(req, res) {
+  articlesModel.editArticle(req.params.id, req.body).then(
+    () => res.sendStatus(200),
+    () => res.sendStatus(204)
+  );
+}
 
-exports.deleteElement = function (req, res) {
-  articlesModel.removeArticle(req.params.id);
-  res.sendStatus(200);
+function deleteElement(req, res) {
+  articlesModel.removeArticle(req.params.id).then(
+    () => res.sendStatus(200),
+    () => res.sendStatus(400)
+  );
+}
+
+module.exports = {
+  getArticles,
+  findById,
+  addArticle,
+  editArticle,
+  deleteElement,
 };
