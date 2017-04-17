@@ -14,17 +14,23 @@ const articleList = (function () {
   let paginationPagesAmount = 1;
 
   function displayMainPage() {
-    requests.getArticles({ skip: 0, amount: 12 }, (status, articles) => {
-      const container = heyQuery('.last-article-list');
-      displayArticles(container, articles);
-    });
+    requests.getArticles({ skip: 0, amount: 12 }).then(
+      (res) => {
+        const container = heyQuery('.last-article-list');
+        displayArticles(container, res.articles);
+      },
+      status => messageService.showErrorForm(status)
+    );
 
     for (let i = 0; i < CONTAINER_CLASSES.length; i++) {
       const options = { skip: 0, amount: 5, tags: [TAGS[i]] };
-      requests.getArticles(options, (status, articles) => {
-        const container = heyQuery(CONTAINER_CLASSES[i]);
-        displayArticles(container, articles);
-      });
+      requests.getArticles(options).then(
+        (res) => {
+          const container = heyQuery(CONTAINER_CLASSES[i]);
+          displayArticles(container, res.articles);
+        },
+        status => messageService(status)
+      );
     }
 
     showMainPage();
@@ -68,10 +74,10 @@ const articleList = (function () {
 
   function convDate(date) {
     return `${date.getUTCFullYear()}/${
-            (`0${date.getUTCMonth() + 1}`).slice(-2)}/${
-            (`0${date.getUTCDate()}`).slice(-2)} ${
-            (`0${date.getUTCHours()}`).slice(-2)}:${
-            (`0${date.getUTCMinutes()}`).slice(-2)}`;
+      (`0${date.getUTCMonth() + 1}`).slice(-2)}/${
+      (`0${date.getUTCDate()}`).slice(-2)} ${
+      (`0${date.getUTCHours()}`).slice(-2)}:${
+      (`0${date.getUTCMinutes()}`).slice(-2)}`;
   }
 
   function showMainPage() {
@@ -108,7 +114,8 @@ const articleList = (function () {
 
 
   function tagClickHandler(event) {
-    if (event.target.tagName !== 'H1' && event.target.className !== 'header-tag-button') {
+    const t = event.target;
+    if (t.tagName !== 'H1' && t.className !== 'header-tag-button') {
       return;
     }
 
@@ -169,9 +176,9 @@ const articleList = (function () {
       paginationPosition--;
       displayArticleList();
     } else if (event.target.id === 'next-page') {
-        paginationPosition++;
-        displayArticleList();
-      }
+      paginationPosition++;
+      displayArticleList();
+    }
   }
 
   function displayArticleList() {
@@ -179,13 +186,17 @@ const articleList = (function () {
     options.skip = ARTICLES_AMOUNT * paginationPosition;
     options.amount = ARTICLES_AMOUNT;
 
-    requests.getArticles(options, (status, articles, amount) => {
-      showArticleList(articles);
-      paginationPagesAmount = Math.ceil(amount / ARTICLES_AMOUNT);
+    requests.getArticles(options).then(
+      (res) => {
+        showArticleList(res.articles);
 
-      addPagination(paginationPagesAmount);
-      activatePaginationButton(paginationPosition, paginationPagesAmount - 1);
-    });
+        paginationPagesAmount = Math.ceil(res.amount / ARTICLES_AMOUNT);
+
+        addPagination(paginationPagesAmount);
+        activatePaginationButton(paginationPosition, paginationPagesAmount - 1);
+      },
+      status => messageService.showErrorForm(status)
+    );
     window.scrollTo(0, 0);
   }
 

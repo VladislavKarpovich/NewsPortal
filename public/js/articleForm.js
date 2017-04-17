@@ -16,11 +16,14 @@
     currentArticleId = id;
     OPERATION = 'EDIT';
 
-    requests.getArticle(id, (status, article) => {
-      displayPostPageForm(article);
-      const images = queryAll('#edit-form-images-container div');
-      [].forEach.call(images, item => item.addEventListener('click', deleteImageBlock));
-    });
+    requests.getArticle(id).then(
+      (article) => {
+        displayPostPageForm(article);
+        const images = queryAll('#edit-form-images-container div');
+        [].forEach.call(images, item => item.addEventListener('click', deleteImageBlock));
+      },
+      status => messageService.showErrorForm(`Статья не найдена. ${status}`)
+    );
   }
 
   function displayPostPageForm(article) {
@@ -88,10 +91,10 @@
 
   function convDate(date) {
     return `${date.getUTCFullYear()}/${
-            (`0${date.getUTCMonth() + 1}`).slice(-2)}/${
-            (`0${date.getUTCDate()}`).slice(-2)} ${
-            (`0${date.getUTCHours()}`).slice(-2)}:${
-            (`0${date.getUTCMinutes()}`).slice(-2)}`;
+      (`0${date.getUTCMonth() + 1}`).slice(-2)}/${
+      (`0${date.getUTCDate()}`).slice(-2)} ${
+      (`0${date.getUTCHours()}`).slice(-2)}:${
+      (`0${date.getUTCMinutes()}`).slice(-2)}`;
   }
 
   function initDetailViewTags(tags) {
@@ -128,7 +131,7 @@
     OPERATION = 'ADD';
   }
 
-  function hidePostPageFormHandel() {
+  function hidePostPageFormHandler() {
     heyId('overlay').style.display = 'none';
     heyId('post-page').style.display = 'none';
     document.body.style.overflowY = '';
@@ -194,7 +197,7 @@
     }
   }
 
-  function saveArticleHandel() {
+  function saveArticleHandler() {
     if (form.getElementsByClassName('wrong').length !== 0) {
       messageService.showErrorForm('Не валидная статья!');
       return;
@@ -227,9 +230,10 @@
     const exclamationForm = heyId('exclamation-form-ok-button');
     exclamationForm.removeEventListener('click', editArticle);
 
-    requests.addArticle(newArticle, () => {
-      messageService.showMessageForm('Новость успешно сохранена.', 'Готово');
-    });
+    requests.addArticle(newArticle).then(
+      () => messageService.showMessageForm('Новость успешно сохранена.', 'Готово'),
+      status => messageService.showErrorForm(`Ошибка сохраненения${status}`)
+    );
   }
 
   function editArticle() {
@@ -244,21 +248,25 @@
     const exclamationForm = heyId('exclamation-form-ok-button');
     exclamationForm.removeEventListener('click', editArticle);
 
-    requests.updateArticle(currentArticleId, newArticle, () => {
-      messageService.showMessageForm('Новость успешно сохранена.', 'Готово');
-    });
+    requests.updateArticle(currentArticleId, newArticle).then(
+      () => messageService.showMessageForm('Новость успешно сохранена.', 'Готово'),
+      status => messageService.showErrorForm(`Ошибка сохраненения${status}`)
+    );
   }
 
-  function deleteArticleHandel() {
+  function deleteArticleHandler() {
     messageService.showExclamationForm('Удалить новость?', 'Удаление');
     heyId('exclamation-form-ok-button').addEventListener('click', handler);
 
     function handler() {
       heyId('exclamation-form-ok-button').removeEventListener('click', handler);
-      requests.deleteArticle(currentArticleId, () => {
-        messageService.showMessageForm('Новость успешно удалена из ленты.', 'Готово');
-        articleList.displayMainPage();
-      });
+      requests.deleteArticle(currentArticleId).then(
+        () => {
+          messageService.showMessageForm('Новость успешно удалена из ленты.', 'Готово');
+          articleList.displayMainPage();
+        },
+        status => messageService.showErrorForm(`Ошибка удаления${status}`)
+      );
     }
   }
 
@@ -300,13 +308,13 @@
   const mainBlock = document.querySelector('main');
   mainBlock.addEventListener('click', showArticleDetailViewHandler);
   heyId('user-panel-add-article-button').addEventListener('click', showAddArticleFormHandler);
-  heyId('close-post-page-button').addEventListener('click', hidePostPageFormHandel);
-  heyId('overlay').addEventListener('click', hidePostPageFormHandel);
+  heyId('close-post-page-button').addEventListener('click', hidePostPageFormHandler);
+  heyId('overlay').addEventListener('click', hidePostPageFormHandler);
   heyId('edit-form-add-image-button').addEventListener('click', addImageBlock);
 
   heyId('edit-form').addEventListener('keyup', contentChanged);
   heyId('edit-form').addEventListener('change', contentChanged);
 
-  heyId('editing-save-button').addEventListener('click', saveArticleHandel);
-  heyId('editing-delete-button').addEventListener('click', deleteArticleHandel);
+  heyId('editing-save-button').addEventListener('click', saveArticleHandler);
+  heyId('editing-delete-button').addEventListener('click', deleteArticleHandler);
 }());

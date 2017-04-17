@@ -11,13 +11,15 @@
         "no-underscore-dangle": "off",
         "no-useless-return": "off",
         "eqeqeq": "off",
-        "comma-dangle": "off"
+        "comma-dangle": "off",
+        "no-plusplus": "off"
     },
     "globals": {
         "document": false,
         "window": false,
         "XMLHttpRequest": false,
         "requests": false,
-        "_": false
+        "messageService": false,
+        "articleList": false
     }    
 }

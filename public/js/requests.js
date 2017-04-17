@@ -1,19 +1,26 @@
 const requests = (function () {
-  function getArticles(options, callBack) {
-    const req = new XMLHttpRequest();
+  function getArticles(options) {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
 
-    function loadHandler() {
-      const res = JSON.parse(this.responseText);
-      res.articles.forEach(item => item.createdAt = new Date(item.createdAt));
+      function loadHandler() {
+        req.removeEventListener('load', loadHandler);
+        const res = JSON.parse(this.responseText);
+        res.articles.forEach(item => item.createdAt = new Date(item.createdAt));
 
-      callBack(req.status, res.articles, res.amount);
-      req.removeEventListener('load', loadHandler);
-    }
+        if (req.status === 200) {
+          resolve(res);
+          return;
+        }
 
-    req.addEventListener('load', loadHandler);
-    req.open('GET', `/articles?${convertToQuery(options)}`);
+        reject(req.status);
+      }
 
-    req.send();
+      req.addEventListener('load', loadHandler);
+      req.open('GET', `/articles?${convertToQuery(options)}`);
+
+      req.send();
+    });
   }
 
   function convertToQuery(obj) {
@@ -28,65 +35,89 @@ const requests = (function () {
   }
 
 
-  function getArticle(id, callBack) {
-    const req = new XMLHttpRequest();
+  function getArticle(id) {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
 
-    function loadHandler() {
-      const article = JSON.parse(this.responseText);
-      article.createdAt = new Date(article.createdAt);
+      function loadHandler() {
+        req.removeEventListener('load', loadHandler);
+        const article = JSON.parse(this.responseText);
+        article.createdAt = new Date(article.createdAt);
 
-      callBack(req.status, article);
-      req.removeEventListener('load', loadHandler);
-    }
+        if (req.status === 200) {
+          resolve(article);
+          return;
+        }
+        reject(req.status);
+      }
 
-    req.addEventListener('load', loadHandler);
+      req.addEventListener('load', loadHandler);
 
-    req.open('GET', `/article/${id}`);
-    req.send();
+      req.open('GET', `/article/${id}`);
+      req.send();
+    });
   }
 
 
-  function addArticle(article, callBack) {
-    const req = new XMLHttpRequest();
+  function addArticle(article) {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
 
-    function loadHandler() {
-      callBack(req.status);
-      req.removeEventListener('load', loadHandler);
-    }
+      function loadHandler() {
+        req.removeEventListener('load', loadHandler);
+        if (req.status === 200) {
+          resolve();
+          return;
+        }
+        reject(req.status);
+      }
 
-    req.addEventListener('load', loadHandler);
-    req.open('POST', '/article');
-    req.setRequestHeader('content-type', 'application/json');
-    req.send(JSON.stringify(article));
+      req.addEventListener('load', loadHandler);
+      req.open('POST', '/article');
+      req.setRequestHeader('content-type', 'application/json');
+      req.send(JSON.stringify(article));
+    });
   }
 
 
-  function updateArticle(id, article, callBack) {
-    const req = new XMLHttpRequest();
+  function updateArticle(id, article) {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
 
-    function loadHandler() {
-      callBack();
-      req.removeEventListener('load', loadHandler);
-    }
+      function loadHandler() {
+        req.removeEventListener('load', loadHandler);
+        if (req.status === 200) {
+          resolve();
+          return;
+        }
+        reject(req.status);
+      }
 
-    req.addEventListener('load', loadHandler);
-    req.open('PUT', `/article/${id}`);
-    req.setRequestHeader('content-type', 'application/json');
-    req.send(JSON.stringify(article));
+      req.addEventListener('load', loadHandler);
+      req.open('PUT', `/article/${id}`);
+      req.setRequestHeader('content-type', 'application/json');
+      req.send(JSON.stringify(article));
+    });
   }
 
 
-  function deleteArticle(id, callBack) {
-    const req = new XMLHttpRequest();
+  function deleteArticle(id) {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
 
-    function loadHandler() {
-      callBack(req.status);
-      req.removeEventListener('load', loadHandler);
-    }
+      function loadHandler() {
+        req.removeEventListener('load', loadHandler);
+        if (req.status === 200) {
+          resolve();
+          return;
+        }
+        reject(req.status);
+      }
 
-    req.addEventListener('load', loadHandler);
-    req.open('DELETE', `article/${id}`);
-    req.send();
+      req.addEventListener('load', loadHandler);
+      req.open('DELETE', `article/${id}`);
+      req.send();
+    });
   }
 
 
