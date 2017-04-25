@@ -1,23 +1,21 @@
 #post-page {
     overflow: hidden;
     position: fixed;
-    top: 1em;
-    bottom: 1em;
-    width: 90%;
-    left: 5%;
-    margin: auto;
-    padding: 1%;
-    font-size: 1em;
+    top: 3.5em;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2em;
     display: none;
-    z-index: 150;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
     background: #FFF;
     overflow: scroll;
 }
 
 #close-post-page-button {
+    position: fixed;
+    top: 5em;
+    right: 3em;
     padding: 0.25em;
-    float: right;
     height: 1.5em;
     width: 1.5em;
     background-color: transparent;

@@ -14,7 +14,7 @@ const articleList = (function () {
   let paginationPagesAmount = 1;
 
   function displayMainPage() {
-    requests.getArticles({ skip: 0, amount: 12 }).then(
+    requests.getArticles({ skip: 0, amount: 8 }).then(
       (res) => {
         const container = heyQuery('.last-article-list');
         displayArticles(container, res.articles);
@@ -23,7 +23,7 @@ const articleList = (function () {
     );
 
     for (let i = 0; i < CONTAINER_CLASSES.length; i++) {
-      const options = { skip: 0, amount: 5, tags: [TAGS[i]] };
+      const options = { skip: 0, amount: 4, tags: [TAGS[i]] };
       requests.getArticles(options).then(
         (res) => {
           const container = heyQuery(CONTAINER_CLASSES[i]);
@@ -90,19 +90,19 @@ const articleList = (function () {
     const button = findHeaderButton(buttonText);
     if (button) {
       deactivateHeaderButtons();
-      button.style.color = '#FFF';
+      button.classList.add('active-button');
     }
   }
 
   function findHeaderButton(buttonText) {
-    const buttons = queryAll('.nav-buttons button');
+    const buttons = queryAll('#header-menu nav button');
     return [].find.call(buttons, item => item.textContent === buttonText);
   }
 
   function deactivateHeaderButtons() {
-    const buttons = queryAll('.nav-buttons button');
+    const buttons = queryAll('#header-menu nav button.active-button');
     [].forEach.call(buttons, (item) => {
-      item.style.color = '#80CBC4';
+      item.classList.remove('active-button');
     });
   }
 
@@ -122,6 +122,7 @@ const articleList = (function () {
     paginationPosition = 0;
     const option = event.target.textContent.split(' ')[0];
     activateHeaderButton(option);
+    hidePostPageForm();
 
     switch (option) {
       case 'Главная':

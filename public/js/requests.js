@@ -120,6 +120,23 @@ const requests = (function () {
     });
   }
 
+  function getArticleFormMeduza(url) {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
+
+      function loadHandler() {
+        req.removeEventListener('load', loadHandler);
+        const res = JSON.parse(this.responseText);
+        res.createdAt = new Date(res.createdAt);
+        console.log(res);
+        resolve(res);
+      }
+
+      req.addEventListener('load', loadHandler);
+      req.open('GET', `/articleData?url=${url}`);
+      req.send();
+    });
+  }
 
   return {
     getArticles,
@@ -127,5 +144,6 @@ const requests = (function () {
     addArticle,
     updateArticle,
     deleteArticle,
+    getArticleFormMeduza
   };
 }());

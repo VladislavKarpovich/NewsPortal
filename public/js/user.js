@@ -1,7 +1,7 @@
 (function () {
   function userInHandel() {
     heyId('log-in-form').style.display = 'none';
-    heyId('overlay').style.display = 'none';
+    heyId('message-overlay').style.display = 'none';
 
     const loginForm = heyId('log-in-form');
     if (loginForm.login.value === '') return;
@@ -34,12 +34,12 @@
 
   function showLoginForm() {
     heyId('log-in-form').style.display = 'block';
-    heyId('overlay').style.display = 'block';
+    heyId('message-overlay').style.display = 'block';
   }
 
   function hideLoginForm() {
     heyId('log-in-form').style.display = 'none';
-    heyId('overlay').style.display = 'none';
+    heyId('message-overlay').style.display = 'none';
   }
 
   function heyId(id) {
@@ -53,7 +53,7 @@
 
   heyId('login-form-button').addEventListener('click', userInHandel);
   heyId('user-panel-out-button').addEventListener('click', userOutHandel);
-  heyId('overlay').addEventListener('click', hideLoginForm);
+  heyId('message-overlay').addEventListener('click', hideLoginForm);
 
   userOutHandel();
 }());

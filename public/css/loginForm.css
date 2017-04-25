@@ -9,7 +9,7 @@
     box-sizing: border-box;
     font-size: 14px;
     position: fixed;
-    z-index: 100;
+    z-index: 200;
     padding: 1em;
     background: #FAFAFA;
     display: none;

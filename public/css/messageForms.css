@@ -41,16 +41,29 @@
     border-bottom: 2px #EF9A9A solid;
 }
 
-#exclamation-form h1 {
+#exclamation-form h1,
+#url-input-form h1 {
     color: #FFB74D;
     border-bottom: 2px #FFB74D solid;
 }
 
 
-#exclamation-form button {
+#exclamation-form button,
+#url-input-form button {
     width: calc(50% - 0.4em - 2px);
     margin: 0em 0.2em;
     
+}
+
+#url-input-form input {
+    outline: 0;
+    border: 0;
+    background: #E0E0E0;
+    width: 98%;
+    margin: 1%;
+    padding: 1em;
+    box-sizing: border-box;
+    font-size: 14px;
 }
 
 #message-form h1 {

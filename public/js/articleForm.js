@@ -10,9 +10,14 @@
   const form = heyId('edit-form');
 
   function showArticleDetailViewHandler(event) {
-    if (event.target.className !== 'show-more-article-button') return;
+    const t = event.target;
+    if (t.className !== 'show-more-article-button' &&
+      t.tagName !== 'H2' &&
+      t.className !== 'post-image') {
+      return;
+    }
 
-    const id = event.target.parentNode.id;
+    const id = t.parentNode.id;
     currentArticleId = id;
     OPERATION = 'EDIT';
 
@@ -27,6 +32,7 @@
   }
 
   function displayPostPageForm(article) {
+    window.scrollTo(0, 0);
     const cont = heyId('post-page');
 
     cont.querySelector('h1').textContent = article ? article.title : 'title';
@@ -40,17 +46,16 @@
 
     initDetailViewImages(article ? article.images : ['../img/image-template.png']);
 
-    cont.querySelector('p').textContent = article ? article.text : 'text';
+    cont.querySelector('p').innerHTML = article ? article.text : 'text';
     form.text.value = article ? article.text : '';
     cont.querySelector('.author-name').textContent = article ? article.author : '';
 
     const date = article ? convDate(article.createdAt) : convDate(new Date());
     cont.querySelector('.publication-date').textContent = date;
 
-    initDetailViewTags(article ? article.tags : []);
+    initDetailViewTags(article ? article.tags || [] : []);
 
     heyId('post-page').style.display = 'block';
-    heyId('overlay').style.display = 'block';
     document.body.style.overflowY = 'hidden';
   }
 
@@ -135,7 +140,6 @@
     heyId('overlay').style.display = 'none';
     heyId('post-page').style.display = 'none';
     document.body.style.overflowY = '';
-    heyId('overlay').style.display = 'none';
   }
 
   function contentChanged(event) {
@@ -289,6 +293,20 @@
     return tags;
   }
 
+  function showUrlInputForm() {
+    messageService.showUrlInputForm();
+    heyId('url-input-form-ok-button').addEventListener('click', loadFromMeduzaHandler);
+  }
+
+  function loadFromMeduzaHandler() {
+    heyId('url-input-form-ok-button').removeEventListener('click', loadFromMeduzaHandler);
+    let url = heyQuery('#url-input-form input').value;
+    url = url.replace('https://meduza.io/', '');
+    const promise = requests.getArticleFormMeduza(url);
+    promise.then(displayPostPageForm, messageService.showErrorForm);
+    messageService.hideUrlInputForm();
+  }
+
   function heyId(id) {
     return document.getElementById(id);
   }
@@ -317,4 +335,5 @@
 
   heyId('editing-save-button').addEventListener('click', saveArticleHandler);
   heyId('editing-delete-button').addEventListener('click', deleteArticleHandler);
+  heyId('load-from-meduza-button').addEventListener('click', showUrlInputForm);
 }());

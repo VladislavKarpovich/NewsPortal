@@ -35,7 +35,6 @@ function addArticle(req, res) {
     () => res.sendStatus(200),
     () => res.sendStatus(400)
   );
-  res.send(200);
 }
 
 function editArticle(req, res) {

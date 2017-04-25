@@ -18,26 +18,22 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT-News</title>
+    <title>News</title>
 </head>
 
 <body>
     <div class="header-line">
         <header>
-            <a class="logo">IT-News</a>
+            <a class="logo">News</a>
             <div class="header-menu" id="header-menu">
-                <input type="text" placeholder="Поиск">
                 <nav>
-                    <img src="img/book.png" alt="">
-                    <div class="nav-buttons">
-                        <button class="header-tag-button">Главная</button>
-                        <button class="header-tag-button">Последние</button>
-                        <button class="header-tag-button">Разработка</button>
-                        <button class="header-tag-button">Администрирование</button>
-                        <button class="header-tag-button">Дизайн</button>
-                        <button class="header-tag-button">Управление</button>
-                        <button class="header-tag-button">Маркетинг</button>
-                    </div>
+                    <button class="header-tag-button">Главная</button>
+                    <button class="header-tag-button">Последние</button>
+                    <button class="header-tag-button">Разработка</button>
+                    <button class="header-tag-button">Администрирование</button>
+                    <button class="header-tag-button">Дизайн</button>
+                    <button class="header-tag-button">Управление</button>
+                    <button class="header-tag-button">Маркетинг</button>
                 </nav>
                 <div class="header-user-panel-container">
                     <img src="img/user-iconW.png" alt="" id="log-in-button">
@@ -194,11 +190,11 @@
             <div>
                 <button type="button" id="editing-save-button" class="edit-form-button">Сохранить</button>
                 <button type="button" id="editing-delete-button" class="edit-form-button">Удалить</button>
+                <button type="button" id="load-from-meduza-button" class="edit-form-button">Загрузить с meduza.io</button>
                 <div class="clearfix"></div>
             </div>
 
         </form>
-
     </div>
 
     <div id="filter-button">
@@ -229,13 +225,6 @@
         <button type="button" id="login-form-button">OK</button>
     </form>
 
-    <form class="log-in-form" id="log-in-form">
-        <h1>Войти</h1>
-        <input name="login" type="text" placeholder="имя">
-        <input name="password" type="password" placeholder="пароль">
-        <button type="button" id="login-form-button">OK</button>
-    </form>
-
     <form class="message-form" id="error-form">
         <h1>Ошибка!</h1>
         <p></p>
@@ -255,13 +244,19 @@
         <button type="button" id="message-form-ok-button">OK</button>
     </form>
 
+    <form class="message-form" id="url-input-form">
+        <h1></h1>
+        <p></p>
+        <input type="url" placeholder="url">
+        <button type="button" id="url-input-form-ok-button">OK</button>
+        <button type="button" id="url-input-cancel-button">Отмена</button>
+    </form>
+
     <script type="text/javascript" src="js/messageService.js"></script>
     <script type="text/javascript" src="js/requests.js"></script>
     <script type="text/javascript" src="js/user.js"></script>
     <script type="text/javascript" src="js/slider.js"></script>
     <script type="text/javascript" src="js/articlesList.js"></script>
     <script type="text/javascript" src="js/articleForm.js"></script>
-    <!--<script type="text/javascript" src="js/scripts.js"></script>-->
 </body>
-
 </html>

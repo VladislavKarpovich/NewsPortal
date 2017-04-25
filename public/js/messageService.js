@@ -38,6 +38,19 @@ const messageService = (function () {
     heyId('message-overlay').style.display = 'none';
   }
 
+  function showUrlInputForm(content, title) {
+    const form = heyId('url-input-form');
+    form.querySelector('p').textContent = content || '';
+    form.querySelector('h1').textContent = title || 'Meduza';
+    heyId('url-input-form').style.display = 'block';
+    heyId('message-overlay').style.display = 'block';
+  }
+
+  function hideUrlInputForm() {
+    heyId('url-input-form').style.display = 'none';
+    heyId('message-overlay').style.display = 'none';
+  }
+
   function heyId(id) {
     return document.getElementById(id);
   }
@@ -47,11 +60,13 @@ const messageService = (function () {
     hideErrorForm();
     hideExclamationForm();
     hideMessageForm();
+    hideUrlInputForm();
   });
 
   heyId('error-form-ok-button').addEventListener('click', hideErrorForm);
   heyId('exclamation-form-cancel-button').addEventListener('click', hideExclamationForm);
   heyId('exclamation-form-ok-button').addEventListener('click', hideExclamationForm);
+  heyId('url-input-cancel-button').addEventListener('click', hideUrlInputForm);
 
   return {
     showErrorForm,
@@ -60,5 +75,7 @@ const messageService = (function () {
     hideExclamationForm,
     showMessageForm,
     hideMessageForm,
+    showUrlInputForm,
+    hideUrlInputForm
   };
 }());

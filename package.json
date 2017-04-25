@@ -17,6 +17,7 @@
     "diskdb": "^0.1.17",
     "express": "^4.15.2",
     "nconf": "^0.8.4",
+    "request": "^2.81.0",
     "underscore": "^1.8.3",
     "winston": "^2.3.1"
   },
