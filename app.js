@@ -1,26 +1,14 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const config = require('./config');
 const log = require('winston');
-const articles = require('./controllers/articles');
-const sideResources = require('./controllers/sideResources');
+const middlewares = require('./middlewares');
+const articles = require('./routes/articles');
+const authorization = require('./routes/authorization');
 
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(config.get('viewsFolder')));
-
-app.get('/', (req, res) => {
-  res.send('index.html');
-});
-
-app.get('/articles', articles.getArticles);
-app.get('/article/:id', articles.findById);
-app.post('/article', articles.addArticle);
-app.put('/article/:id', articles.editArticle);
-app.delete('/article/:id', articles.deleteElement);
-
-app.get('/articleData', sideResources.getArticleFromMeduza);
+app.use('/articles', articles);
+app.use(middlewares);
+app.use(authorization);
 
 app.use((req, res) => {
   res.send(404, 'Page not found');

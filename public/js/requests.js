@@ -17,7 +17,7 @@ const requests = (function () {
       }
 
       req.addEventListener('load', loadHandler);
-      req.open('GET', `/articles?${convertToQuery(options)}`);
+      req.open('GET', `/articles/filter?${convertToQuery(options)}`);
 
       req.send();
     });
@@ -53,7 +53,7 @@ const requests = (function () {
 
       req.addEventListener('load', loadHandler);
 
-      req.open('GET', `/article/${id}`);
+      req.open('GET', `/articles/${id}`);
       req.send();
     });
   }
@@ -73,7 +73,7 @@ const requests = (function () {
       }
 
       req.addEventListener('load', loadHandler);
-      req.open('POST', '/article');
+      req.open('POST', '/articles');
       req.setRequestHeader('content-type', 'application/json');
       req.send(JSON.stringify(article));
     });
@@ -94,7 +94,7 @@ const requests = (function () {
       }
 
       req.addEventListener('load', loadHandler);
-      req.open('PUT', `/article/${id}`);
+      req.open('PUT', `/articles/${id}`);
       req.setRequestHeader('content-type', 'application/json');
       req.send(JSON.stringify(article));
     });
@@ -115,7 +115,7 @@ const requests = (function () {
       }
 
       req.addEventListener('load', loadHandler);
-      req.open('DELETE', `article/${id}`);
+      req.open('DELETE', `articles/${id}`);
       req.send();
     });
   }
@@ -133,7 +133,75 @@ const requests = (function () {
       }
 
       req.addEventListener('load', loadHandler);
-      req.open('GET', `/articleData?url=${url}`);
+      req.open('GET', `/articles/side?url=${url}`);
+      req.send();
+    });
+  }
+
+  function getUser() {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
+
+      function loadHandler() {
+        req.removeEventListener('load', loadHandler);
+        const res = JSON.parse(this.responseText);
+
+        if (req.status === 200) {
+          resolve(res);
+          return;
+        }
+
+        reject(req.status);
+      }
+
+      req.addEventListener('load', loadHandler);
+      req.open('GET', '/user');
+
+      req.send();
+    });
+  }
+
+  function login(user) {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
+
+      function loadHandler() {
+        req.removeEventListener('load', loadHandler);
+        if (req.status === 200) {
+          resolve();
+          return;
+        }
+
+        reject(req.status);
+      }
+
+      req.open('POST', '/login');
+      req.setRequestHeader('content-type', 'application/json');
+      req.addEventListener('load', loadHandler);
+      console.log(user);
+
+      const body = JSON.stringify(user);
+
+      req.send(body);
+    });
+  }
+
+  function logout() {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
+
+      function loadHandler() {
+        req.removeEventListener('load', loadHandler);
+        if (req.status === 200) {
+          resolve();
+          return;
+        }
+        reject(req.status);
+      }
+
+      req.addEventListener('load', loadHandler);
+      req.open('DELETE', '/logout');
+
       req.send();
     });
   }
@@ -144,6 +212,9 @@ const requests = (function () {
     addArticle,
     updateArticle,
     deleteArticle,
-    getArticleFormMeduza
+    getArticleFormMeduza,
+    getUser,
+    login,
+    logout,
   };
 }());
