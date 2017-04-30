@@ -1,43 +1,26 @@
-const cookieParser = require('cookie-parser');
-const sessions = require('express-session');
+const config = require('../config');
 const passport = require('../models/passport');
-const SessionStore = require('connect-diskdb')(sessions);
 const router = require('express').Router();
-const log = require('winston');
-
-const options = {
-  path: './data',
-  name: 'sessions',
-};
-const diskDBSessionStore = new SessionStore(options);
-
-router.use(cookieParser());
-router.use(sessions({
-  secret: 'B9CelARkWkXWqKzkCVAzjV7Nftan9WB9CelARkWkXWqKzkCVAzjV7Nftan9WqDqD',
-  resave: false,
-  saveUninitialized: false,
-  store: diskDBSessionStore,
-}));
-
-router.use(passport.initialize());
-router.use(passport.session());
+const log = require('../libs/log')(module);
 
 
 router.post('/login', (req, res) => {
   passport.authenticate('local', (err, user) => {
-    if (!user) { return res.status(401).end('Error'); }
-    const sess = req.session;
-    sess.user = user;
-    sess.save(errorHandle);
-
-    log.info(`login ${user.username}`);
-    return res.end('Authenticated!');
+    console.log(`${err} ${user}`);
+    if (user) saveSession(req.session, user);
+    return res.status(200).send({ err, user });
   })(req, res);
 });
 
+function saveSession(session, user) {
+  session.user = user;
+  session.save();
+  log.info(`login ${user.username}`);
+}
+
 router.delete('/logout', (req, res) => {
   req.session.destroy(errorHandle);
-  res.sendStatus(200);
+  res.send(200).end();
 });
 
 router.get('/user', (req, res) => {

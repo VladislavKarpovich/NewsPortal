@@ -8,7 +8,7 @@ function getArticle(url) {
         reject(reqErr || body);
         return;
       }
-      
+
       gunzip(body).then(resolve, reject);
     });
   });
@@ -38,7 +38,7 @@ function convertArticle(meduzaArticle) {
     images: getImages(root),
     text: root.content.body,
     author: 'Meduza',
-    createdAt: new Date(root.pub_date)
+    createdAt: Date.now()
   };
 
   return article;

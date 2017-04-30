@@ -1,5 +1,4 @@
 const articlesModel = require('../models/articles');
-const log = require('winston');
 const config = require('../config');
 
 function parseQuery(query) {

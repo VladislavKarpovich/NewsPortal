@@ -1,7 +1,7 @@
 const sessionsDb = require('../db').GetSessionsDB();
 const usersDb = require('../db').GetUsersDB();
 
-function getSession(id) {
+function get(id) {
   return new Promise((resolve, reject) => {
     const session = sessionsDb.findOne({ _id: id });
     if (session) {
@@ -12,7 +12,7 @@ function getSession(id) {
   });
 }
 
-function updateSession(id, session) {
+function set(id, session) {
   return new Promise((resolve, reject) => {
     const options = { upsert: true };
     const result = sessionsDb.update({ _id: id }, session, options);
@@ -24,7 +24,7 @@ function updateSession(id, session) {
   });
 }
 
-function removeSession(id) {
+function destroy(id) {
   return new Promise((resolve, reject) => {
     const result = sessionsDb.remove({ _id: id });
     if (result) {
@@ -36,7 +36,7 @@ function removeSession(id) {
 }
 
 module.exports = {
-  getSession,
-  removeSession,
-  updateSession
+  get,
+  set,
+  destroy
 };

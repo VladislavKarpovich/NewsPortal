@@ -144,9 +144,10 @@ const requests = (function () {
 
       function loadHandler() {
         req.removeEventListener('load', loadHandler);
-        const res = JSON.parse(this.responseText);
 
         if (req.status === 200) {
+          const rt = this.responseText;
+          const res = rt ? JSON.parse(rt) : '';
           resolve(res);
           return;
         }
@@ -167,18 +168,18 @@ const requests = (function () {
 
       function loadHandler() {
         req.removeEventListener('load', loadHandler);
-        if (req.status === 200) {
-          resolve();
+
+        const res = JSON.parse(this.responseText);
+        if (res.user) {
+          resolve(user);
           return;
         }
-
-        reject(req.status);
+        reject(res.err || { message: 'Ошибка входа.' });
       }
 
       req.open('POST', '/login');
       req.setRequestHeader('content-type', 'application/json');
       req.addEventListener('load', loadHandler);
-      console.log(user);
 
       const body = JSON.stringify(user);
 

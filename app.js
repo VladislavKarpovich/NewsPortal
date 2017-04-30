@@ -1,6 +1,6 @@
 const express = require('express');
 const config = require('./config');
-const log = require('winston');
+const log = require('./libs/log')(module);
 const middlewares = require('./middlewares');
 const articles = require('./routes/articles');
 const authorization = require('./routes/authorization');
@@ -11,12 +11,12 @@ app.use(middlewares);
 app.use(authorization);
 
 app.use((req, res) => {
-  res.send(404, 'Page not found');
+  res.status(404).send('Page not found.');
   log.error(`Page not found ${req.url}`);
 });
 
 app.use((err, req, res, next) => {
-  res.send(500, 'Server error');
+  res.status(500).send('Server error');
   log.error(err);
 });
 

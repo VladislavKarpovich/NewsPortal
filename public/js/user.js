@@ -8,7 +8,7 @@
       password: loginForm.password.value,
     };
 
-    requests.login(user).then(userInHandle, console.log);
+    requests.login(user).then(userInHandle, userLoadErrorHandle);
   }
 
   function userInHandle() {
@@ -74,6 +74,11 @@
 
     userInDataInit(user);
     heyId('log-in-button').removeEventListener('click', showLoginForm);
+  }
+
+  function userLoadErrorHandle(err) {
+    hideLoginForm();
+    messageService.showErrorForm(err.message, 'Ошибка входа');
   }
 
   heyId('login-form-button').addEventListener('click', userInButtonClickHandle);
