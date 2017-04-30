@@ -19,14 +19,14 @@ passport.use(new LocalStrategy(
   (username, password, done) => {
     const user = userDb.findOne({ username });
     if (!user) {
-      done({ message: messages.loginError }, false);
-      return;
+      const mess = { message: messages.loginError };
+      return done(mess, false);
     }
     if (user.password !== password) {
-      done({ message: messages.passwordError }, false);
-      return;
+      const mess = { message: messages.passwordError }
+      return done(mess, false);
     }
-    done(null, user);
+    return done(null, user);
   }
 ));
 

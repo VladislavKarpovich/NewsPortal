@@ -5,10 +5,7 @@ const sessions = require('express-session');
 const SessionStore = require('connect-diskdb')(sessions);
 const router = require('express').Router();
 
-const options = {
-  path: './data',
-  name: 'sessions',
-};
+const options = config.get('connectDiskdb:options');
 const diskDBSessionStore = new SessionStore(options);
 
 router.use(cookieParser());

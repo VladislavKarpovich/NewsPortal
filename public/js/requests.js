@@ -147,7 +147,7 @@ const requests = (function () {
 
         if (req.status === 200) {
           const rt = this.responseText;
-          const res = rt ? JSON.parse(rt) : '';
+          const res = rt ? JSON.parse(rt) : null;
           resolve(res);
           return;
         }

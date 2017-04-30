@@ -10,9 +10,15 @@
             "upsert": false
         }
     },
-    "passportMessages" : {
-       "loginError": "Неверный логин пользователя!",
-       "passwordError": "Неверный пароль!"
+    "connectDiskdb": {
+        "options": {
+            "path": "./data",
+            "name": "sessions"
+        }
+    },
+    "passportMessages": {
+        "loginError": "Неверный логин пользователя!",
+        "passwordError": "Неверный пароль!"
     },
     "session": {
         "secret": "B9CelARkWkXWqKzkCVAzjV7Nftan9WB9CelARkWkXWqKzkCVAzjV7Nftan9WqDqD",
