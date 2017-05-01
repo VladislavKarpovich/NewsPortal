@@ -8,7 +8,6 @@ function getArticle(url) {
         reject(reqErr || body);
         return;
       }
-
       gunzip(body).then(resolve, reject);
     });
   });
@@ -23,6 +22,7 @@ function gunzip(body) {
       }
 
       const article = JSON.parse(dezipped.toString());
+      console.log(article);
       resolve(convertArticle(article));
     });
   });

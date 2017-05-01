@@ -6,9 +6,10 @@ const articles = require('./routes/articles');
 const authorization = require('./routes/authorization');
 
 const app = express();
-app.use('/articles', articles);
+
 app.use(middlewares);
 app.use(authorization);
+app.use('/articles', articles);
 
 app.use((req, res) => {
   res.status(404).send('Page not found.');
