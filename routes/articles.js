@@ -4,7 +4,7 @@ const articles = require('../controllers/articles');
 
 router.get('/filter', articles.getArticles);
 router.get('/side', sideResources.getArticleFromMeduza);
-router.get('/:id', articles.findById);
+router.get('/getbyid/:id', articles.findById);
 router.post('/', articles.addArticle);
 router.put('/:id', articles.editArticle);
 router.delete('/:id', articles.deleteElement);

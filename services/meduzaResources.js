@@ -36,7 +36,7 @@ function convertArticle(meduzaArticle) {
     title: root.title,
     shortDescription: root.description,
     images: getImages(root),
-    text: root.content.body,
+    text: parseText(root.content.body),
     author: 'Meduza',
     createdAt: Date.now()
   };
@@ -52,6 +52,12 @@ function getImages(root) {
 
   const img = root.image.small_url;
   return [`https://meduza.io/${img}`];
+}
+
+function parseText(text) {
+  const blocks = text.replace(/<(?:.|\n)*?>/gm, '').split('\n');
+  const p = blocks.map(b => `<p>${b}</p>`);
+  return p.join('\n');
 }
 
 
