@@ -11,12 +11,10 @@
     requests.login(user).then(userInHandle, userLoadErrorHandle);
   }
 
-  function userInHandle() {
+  function userInHandle(user) {
     heyId('log-in-form').style.display = 'none';
     heyId('message-overlay').style.display = 'none';
-
-    const loginForm = heyId('log-in-form');
-    userInDataInit({ mail: loginForm.login.value });
+    userInDataInit(user);
     heyId('log-in-button').removeEventListener('click', showLoginForm);
   }
 
@@ -26,9 +24,9 @@
 
     const userPanel = heyId('header-user-panel');
     userPanel.className = 'header-user-panel';
-    userPanel.querySelector('h1').textContent = user.name || 'User Name';
+    userPanel.querySelector('h1').textContent = user.username || 'User Name';
     userPanel.querySelector('p').textContent = user.mail || 'usermail@mail.com';
-    userPanel.querySelector('img').src = user.image || 'img/user-icon.png';
+    userPanel.querySelector('img').src = user.img || 'img/user-icon.png';
   }
 
   function userOutHandle() {
@@ -44,7 +42,8 @@
   }
 
   function userOutButtonClickHandle() {
-    requests.logout().then(userOutHandle, console.log);
+    requests.logout()
+      .then(userOutHandle, messageService.showErrorForm);
   }
 
   function showLoginForm() {
@@ -66,7 +65,8 @@
   }
 
   function getUser() {
-    requests.getUser().then(userLoadHandle, console.log);
+    requests.getUser()
+      .then(userLoadHandle, messageService.showErrorForm);
   }
 
   function userLoadHandle(user) {

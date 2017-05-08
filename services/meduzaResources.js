@@ -22,7 +22,7 @@ function gunzip(body) {
       }
 
       const article = JSON.parse(dezipped.toString());
-      console.log(article);
+      console.log(convertArticle(article));
       resolve(convertArticle(article));
     });
   });
@@ -50,12 +50,17 @@ function getImages(root) {
     return g.map(obj => `https://meduza.io/${obj.original_url}`);
   }
 
-  const img = root.image.small_url;
+  const img = root.share_image;
   return [`https://meduza.io/${img}`];
 }
 
 function parseText(text) {
-  const blocks = text.replace(/<(?:.|\n)*?>/gm, '').split('\n');
+  text = text.replace(/<a.*href="(.*?)".*>(.*?)<\/a>/gi, '');
+  text = text.replace(/<script.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/script>/gi, '');
+  text = text.replace(/<img.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/img>/gi, '');
+  text = text.replace(/<style.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/style>/gi, '');
+  text = text.replace(/[\s\n]+/g, ' ');
+  const blocks = text.replace(/<(?:.|\n)*?>/gm, '#').split('#');
   const p = blocks.map(b => `<p>${b}</p>`);
   return p.join('\n');
 }

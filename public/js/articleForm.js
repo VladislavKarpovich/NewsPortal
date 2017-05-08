@@ -34,29 +34,41 @@
   function displayPostPageForm(article) {
     window.scrollTo(0, 0);
     const cont = heyId('post-page');
-
-    cont.querySelector('h1').textContent = article ? article.title : 'title';
-    form.postName.value = article ? article.title : '';
-
-    const shd = article ? article.shortDescription : 'description';
-    cont.querySelector('h6').textContent = shd;
-    form.shortDiscription.value = article ? article.shortDescription : '';
-
-    heyQuery('#post-page .image-container').style.display = 'block';
-
-    initDetailViewImages(article ? article.images : ['../img/image-template.png']);
-
-    cont.querySelector('p').innerHTML = article ? article.text : 'text';
-    form.text.value = article ? article.text : '';
-    cont.querySelector('.author-name').textContent = article ? article.author : '';
-
-    const date = article ? convDate(article.createdAt) : convDate(new Date());
-    cont.querySelector('.publication-date').textContent = date;
-
-    initDetailViewTags(article ? article.tags || [] : []);
-
     heyId('post-page').style.display = 'block';
     document.body.style.overflowY = 'hidden';
+
+    heyQuery('#post-page .image-container').style.display = 'block';
+    const date = article ? convDate(article.createdAt) : convDate(new Date());
+    cont.querySelector('.publication-date').textContent = date;
+    initDetailViewTags(article ? article.tags || [] : ['Другое']);
+
+    if (article) {
+      const blocks = article.text.replace(/<(?:.|\n)*?>/gm, '#').split('#');
+      const text = blocks.join('\n').replace(/[\n]+/g, '\n');
+      const textHtml = article.text;
+
+      postNameChanged(article.title);
+      form.postName.value = article.title;
+      shortDiscriptionChanged(article.shortDescription);
+      form.shortDiscription.value = article.shortDescription;
+      textContentChanged(textHtml);
+      form.text.value = text;
+
+      cont.querySelector('.author-name').textContent = article.author;
+      initDetailViewImages(article.images);
+      return;
+    }
+
+    postNameChanged('');
+    form.postName.value = '';
+    shortDiscriptionChanged('');
+    form.shortDiscription.value = '';
+    textContentChanged('');
+    form.text.value = '';
+    initDetailViewImages([]);
+
+    const username = heyQuery('.header-user-panel-container h1').textContent;
+    cont.querySelector('.author-name').textContent = username;
   }
 
   function initDetailViewImages(images) {
@@ -92,7 +104,6 @@
     heyId('edit-form-images-container').appendChild(imageBlock);
     return id;
   }
-
 
   function convDate(date) {
     return `${date.getUTCFullYear()}/${
@@ -179,7 +190,7 @@
   }
 
   function textContentChanged(text) {
-    currentArticleHtml.querySelector('p').textContent = text;
+    currentArticleHtml.querySelector('p').innerHTML = text;
   }
 
   function deleteImageBlock(event) {
@@ -225,7 +236,7 @@
     const newArticle = {
       title: form.postName.value,
       shortDescription: form.shortDiscription.value,
-      text: form.text.value,
+      text: form.text.value.split('\n').map(p => `<p>${p}</p>`).join(''),
       images: getImages(),
       author: heyQuery('#post-page .author-name').textContent,
       tags: getTags(),
@@ -302,8 +313,8 @@
     heyId('url-input-form-ok-button').removeEventListener('click', loadFromMeduzaHandler);
     let url = heyQuery('#url-input-form input').value;
     url = url.replace('https://meduza.io/', '');
-    const promise = requests.getArticleFormMeduza(url);
-    promise.then(displayPostPageForm, messageService.showErrorForm);
+    requests.getArticleFormMeduza(url)
+      .then(displayPostPageForm, messageService.showErrorForm);
     messageService.hideUrlInputForm();
   }
 

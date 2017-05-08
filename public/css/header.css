@@ -1,49 +1,35 @@
 header {
-    max-width: 80em;
-    margin: 0 auto;
-    height: 3.5em;
+    margin: 0 1em;
+    height: 2.5em;
     overflow: hidden;
     z-index: 150;
 }
 
 .logo {
     color: #FFF;
-    padding: 0.2em;
-    font-size: 2em;
     letter-spacing: -1px;
     text-decoration: none;
     float: left;
+    padding: 0.1em;
+    font-size: 2em;
 }
 
-#header-menu nav {
-    float: left;
-    margin: 1em 5em;
-}
-
-#header-menu nav button {
+#burger-menu-button {
+    float: right;
     background: transparent;
-    text-align: center;
+    width: 1.5em;
+    margin: 0.7em;
     border-style: none;
-    color: #B2DFDB;
     cursor: pointer;
     outline-style: none;
-    font-size: 13px;
-}
-
-#header-menu nav button:hover {
-    color: #EEF;
-}
-
-#header-menu nav button.active-button {
-    color: #FFF;
-    text-decoration: underline;
+    display: block;
 }
 
 #log-in-button {
     float: right;
-    width: 1.8em;
-    height: 1.8em;
-    margin: 0.8em;
+    width: 1.6em;
+    height: 1.6em;
+    margin: 0.6em;
     cursor: pointer;
 }
 
@@ -98,15 +84,4 @@ header {
     margin-bottom: 0.2em;
     margin-top: 0.2em;
     display: block;
-}
-
-#burger-menu-button {
-    background: transparent;
-    width: 1.5em;
-    margin: 0.7em;
-    float: right;
-    border-style: none;
-    cursor: pointer;
-    outline-style: none;
-    display: none;
 }

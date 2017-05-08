@@ -53,7 +53,7 @@ const requests = (function () {
 
       req.addEventListener('load', loadHandler);
 
-      req.open('GET', `/articles/${id}`);
+      req.open('GET', `/articles/getbyid/${id}`);
       req.send();
     });
   }
@@ -128,7 +128,6 @@ const requests = (function () {
         req.removeEventListener('load', loadHandler);
         const res = JSON.parse(this.responseText);
         res.createdAt = new Date(res.createdAt);
-        console.log(res);
         resolve(res);
       }
 
@@ -171,7 +170,7 @@ const requests = (function () {
 
         const res = JSON.parse(this.responseText);
         if (res.user) {
-          resolve(user);
+          resolve(res.user);
           return;
         }
         reject(res.err || { message: 'Ошибка входа.' });
@@ -201,7 +200,7 @@ const requests = (function () {
       }
 
       req.addEventListener('load', loadHandler);
-      req.open('DELETE', '/logout');
+      req.open('POST', '/logout');
 
       req.send();
     });

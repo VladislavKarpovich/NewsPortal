@@ -1,0 +1,119 @@
+#main-menu {
+   transition: all 0.7s;
+   display: block;
+   width: 100%;
+   height: 100%;
+   position: fixed;
+   top: 0;
+   right: -101%;
+   z-index: 30;
+   background: #000;
+   opacity: 0.97;
+   margin: 0;
+   padding: 0;
+   overflow-y: scroll;
+}
+
+#main-menu h1 {
+  color: #CCC;
+  padding: 5px 20px;
+  font-size: 40px;
+}
+
+nav {
+  float: left;
+  width: 50%;
+}
+
+nav button.header-tag-button {
+    text-transform: uppercase;
+    outline: 0;
+    background: transparent;
+    border: 0;
+    padding: 20px 40px;
+    width: 100%;
+    border-bottom: 1px solid #222;
+    text-align: left;
+    color: #CCC;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+}
+
+nav button.header-tag-button:hover {
+    color: #FFF;
+}
+
+.filter-form {
+   width: calc(50% - 100px);
+   margin: 0 50px;
+   float: left;
+   color: #CCC;
+}
+
+.filter-form h2 {
+   padding: 10px 20px;
+}
+
+.filter-form select {
+    outline: 0;
+    border: 0;
+    padding: 4px;
+    margin: 0.5em;
+    box-sizing: border-box;
+    font-size: 14px;
+    width: calc(100% - 1em - 8px);
+    background: #E0E0E0;
+}
+
+.filter-form input[type="date"] {
+    outline: 0;
+    border: 0;
+    background: #E0E0E0;
+    padding: 4px;
+    margin:  0.5em;
+    font-size: 14px;
+    width: calc(47% - 1em - 4px);
+    float: left;
+}
+
+.filter-form input[type="checkbox"]{
+    display: inline;
+    margin: 1em;
+}
+
+.filter-form label {
+    display: block;
+    margin: 0.1em;
+    color: #CCC;
+    font-size: 14px;
+    text-align: left;
+    height: 2em;
+}
+
+.filter-form button {
+    text-transform: uppercase;
+    outline: 0;
+    border: 0;
+    background: transparent;
+    width: 70%;
+    margin: 1em;
+    margin-left: 10%;
+    padding: 7px;
+    color: #CCC;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filter-form button:hover {
+    color: #FFF;
+}
+
+#close-main-menu-button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 2.1em;
+  height: 2.1em;
+  cursor: pointer;
+}

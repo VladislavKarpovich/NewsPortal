@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="css/articleList.css">
     <link rel="stylesheet" href="css/detailView.css">
     <link rel="stylesheet" href="css/editForm.css">
-    <link rel="stylesheet" href="css/filterForm.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/loginForm.css">
     <link rel="stylesheet" href="css/mainPage.css">
     <link rel="stylesheet" href="css/messageForms.css">
     <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/menu.css">
 
     <link rel="stylesheet" href="css/media.css">
     <link rel="stylesheet" href="css/animation.css">
@@ -25,30 +25,52 @@
     <div class="header-line">
         <header>
             <a class="logo">News</a>
-            <div class="header-menu" id="header-menu">
-                <nav>
-                    <button class="header-tag-button">Главная</button>
-                    <button class="header-tag-button">Последние</button>
-                    <button class="header-tag-button">Разработка</button>
-                    <button class="header-tag-button">Администрирование</button>
-                    <button class="header-tag-button">Дизайн</button>
-                    <button class="header-tag-button">Управление</button>
-                    <button class="header-tag-button">Маркетинг</button>
-                </nav>
-                <div class="header-user-panel-container">
-                    <img src="img/user-iconW.png" alt="" id="log-in-button">
-                    <div class="header-user-panel" id="header-user-panel">
-                        <img src="img/user-icon.png" alt="" class="user-panel-image">
-                        <h1>User Name</h1>
-                        <p>usermail@mail.com</p>
-                        <button type="button" class="header-user-panel-button" id="user-panel-add-article-button">Добавить новость</button>
-                        <button type="button" class="header-user-panel-button" id="user-panel-out-button">Выйти</button>
-                    </div>
+            <img src="img/menu-icon.png" alt="menu" id="burger-menu-button">
+            <div class="header-user-panel-container">
+                <img src="img/user-iconW.png" alt="" id="log-in-button">
+                <div class="header-user-panel" id="header-user-panel">
+                    <img src="img/user-icon.png" alt="" class="user-panel-image">
+                    <h1>User Name</h1>
+                    <p>usermail@mail.com</p>
+                    <button type="button" class="header-user-panel-button" id="user-panel-add-article-button">Добавить новость</button>
+                    <button type="button" class="header-user-panel-button" id="user-panel-out-button">Выйти</button>
                 </div>
             </div>
-            <img src="img/menu-icon.png" alt="menu" id="burger-menu-button">
         </header>
     </div>
+
+    <menu id="main-menu">
+        <img src="img/closeMenu.png" alt="" id="close-main-menu-button">
+        <h1>Меню</h1>
+        <nav>
+            <button class="header-tag-button">Главная</button>
+            <button class="header-tag-button">Последние</button>
+            <button class="header-tag-button">Разработка</button>
+            <button class="header-tag-button">Администрирование</button>
+            <button class="header-tag-button">Дизайн</button>
+            <button class="header-tag-button">Управление</button>
+            <button class="header-tag-button">Маркетинг</button>
+            <button class="header-tag-button">Другое</button>
+        </nav>
+
+        <form class="filter-form" id="filter-form">
+            <h2>Фильтр</h2>
+            <label><input type="checkbox">Разработка</label>
+            <label><input type="checkbox">Администрирование</label>
+            <label><input type="checkbox">Дизайн</label>
+            <label><input type="checkbox">Управление</label>
+            <label><input type="checkbox">Маркетинг</label>
+            <label><input type="checkbox">Другое</label>
+            <h4>Автор:</h4>
+            <select id="filter-autors" name="author">
+                <option>Все</option>
+            </select>
+            <h4>Дата публикации:</h4>
+            <input type="date" name="dateFrom">
+            <input type="date" name="dateTo">
+            <button type="button" id="filter-form-button-ok">ok</button>
+        </form>
+    </menu>
 
     <main>
         <div id="main-page" class="main-page">
@@ -85,6 +107,12 @@
             <h1>Маркетинг</h1>
             <section>
                 <div class="marketing-article-list"></div>
+                <div class="clearfix"></div>
+            </section>
+
+            <h1>Другое</h1>
+            <section>
+                <div class="other-article-list"></div>
                 <div class="clearfix"></div>
             </section>
         </div>
@@ -184,6 +212,7 @@
                 <label><input type="checkbox">Дизайн</label>
                 <label><input type="checkbox">Управление</label>
                 <label><input type="checkbox">Маркетинг</label>
+                <label><input type="checkbox">Другое</label>
                 <div class="clearfix"></div>
             </div>
 
@@ -196,27 +225,6 @@
 
         </form>
     </div>
-
-    <div id="filter-button">
-        <img src="img/filter.png" class="button-image">
-        <form class="filter-form" id="filter-form">
-            <h1>Фильтр</h1>
-            <label><input type="checkbox">Разработка</label>
-            <label><input type="checkbox">Администрирование</label>
-            <label><input type="checkbox">Дизайн</label>
-            <label><input type="checkbox">Управление</label>
-            <label><input type="checkbox">Маркетинг</label>
-            <h2>Автор:</h2>
-            <select id="filter-autors" name="author">
-                <option>Все</option>
-            </select>
-            <h2>Дата публикации:</h2>
-            <input type="date" name="dateFrom">
-            <input type="date" name="dateTo">
-            <button type="button" id="filter-form-button-ok">ok</button>
-        </form>
-    </div>
-
 
     <form class="log-in-form" id="log-in-form">
         <h1>Войти</h1>
@@ -258,5 +266,7 @@
     <script type="text/javascript" src="js/slider.js"></script>
     <script type="text/javascript" src="js/articlesList.js"></script>
     <script type="text/javascript" src="js/articleForm.js"></script>
+    <script type="text/javascript" src="js/menuController.js"></script>
 </body>
+
 </html>

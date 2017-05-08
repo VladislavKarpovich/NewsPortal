@@ -3,7 +3,6 @@ const log = require('../libs/log')(module);
 
 function login(req, res) {
   passport.authenticate('local', (err, user) => {
-    console.log(req);
     if (user) saveSession(req.session, user);
     return res.status(200).send({ err, user });
   })(req, res);

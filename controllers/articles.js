@@ -32,7 +32,7 @@ function parseFilter(q) {
   const filter = {
     createdAt: {
       $gte: Number(q.dateFrom) || 0,
-      $lt: Number(q.dateTo) || MAX_DATE
+      $lte: Number(q.dateTo) || MAX_DATE
     }
   };
 
@@ -43,6 +43,7 @@ function parseFilter(q) {
   if (q.tags) {
     filter.tags = { $all: q.tags.split(',') };
   }
+
   return filter;
 }
 
@@ -77,7 +78,6 @@ function editArticle(req, res) {
 
   const article = req.body;
   const id = req.params.id;
-  console.log(article);
   Articles.findOneAndUpdate(id, article, (err, result) => {
     if (err) return res.status(500).end();
     return res.status(200).json(result);

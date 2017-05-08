@@ -60,7 +60,7 @@ const articleList = (function () {
   function convertToHTML(article) {
     const temp = heyQuery('#template-article-item').content;
     temp.querySelector('article').id = article._id;
-    temp.querySelector('.post-image').src = article.images[0];
+    temp.querySelector('.post-image').src = article.img;
     temp.querySelector('h2').textContent = article.title;
     temp.querySelector('p').textContent = article.shortDescription;
     temp.querySelector('.author-name').textContent = article.author;
@@ -238,7 +238,7 @@ const articleList = (function () {
     return document.querySelectorAll(query);
   }
 
-  heyId('header-menu').addEventListener('click', tagClickHandler);
+  heyId('main-menu').addEventListener('click', tagClickHandler);
   heyId('main-page').addEventListener('click', tagClickHandler);
   heyId('filter-form-button-ok').addEventListener('click', filterArticesHandler);
   heyId('message-form-ok-button').addEventListener('click', displayMainPage);
