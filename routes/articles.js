@@ -3,6 +3,7 @@ const sideResources = require('../controllers/sideResources');
 const articles = require('../controllers/articles');
 
 router.get('/filter', articles.getArticles);
+router.get('/authors', articles.getAuthors);
 router.get('/side', sideResources.getArticleFromMeduza);
 router.get('/getbyid/:id', articles.findById);
 router.post('/', articles.addArticle);

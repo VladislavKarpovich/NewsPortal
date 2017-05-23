@@ -20,6 +20,17 @@ function getArticles(req, res) {
     });
 }
 
+function getAuthors(req, res) {
+  Articles.find().exec((err, result) => {
+    if (err) return res.status(500).end();
+
+    const obj = {};
+    result.forEach(a => obj[a.author] = true);
+    const authors = Object.keys(obj);
+    return res.status(200).json(authors);
+  });
+}
+
 function parseQuery(q) {
   const skip = Number(q.skip) || 0;
   const amount = Number(q.amount) || config.get('viewArticlesDefaultAmount');
@@ -94,6 +105,7 @@ function deleteElement(req, res) {
 
 module.exports = {
   getArticles,
+  getAuthors,
   findById,
   addArticle,
   editArticle,

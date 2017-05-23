@@ -41,5 +41,18 @@
     }
   }
 
+  function initAuthorsFilter(authors) {
+    if (!authors) return;
+
+    const tags = authors.map(a => `<option>${a}</option>`);
+    const html = `<option>Все</option>${tags.join()}`;
+    heyId('filter-autors').innerHTML = html;
+  }
+
+  function init() {
+    requests.getAuthors().then(initAuthorsFilter, console.log);
+  }
+
+  init();
   heyId('main-menu').addEventListener('click', tagClickHandler);
 }());

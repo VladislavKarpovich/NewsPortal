@@ -206,6 +206,27 @@ const requests = (function () {
     });
   }
 
+  function getAuthors() {
+    return new Promise((resolve, reject) => {
+      const req = new XMLHttpRequest();
+
+      function loadHandler() {
+        req.removeEventListener('load', loadHandler);
+        if (req.status === 200) {
+          const res = JSON.parse(this.responseText);
+          resolve(res);
+          return;
+        }
+        reject(req.status);
+      }
+
+      req.addEventListener('load', loadHandler);
+      req.open('GET', '/articles/authors');
+
+      req.send();
+    });
+  }
+
   return {
     getArticles,
     getArticle,
@@ -216,5 +237,6 @@ const requests = (function () {
     getUser,
     login,
     logout,
+    getAuthors,
   };
 }());
