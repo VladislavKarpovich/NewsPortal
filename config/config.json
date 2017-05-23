@@ -2,7 +2,7 @@
     "port": 3000,
     "env": "debug",
     "mongoose": {
-        "url": "mongodb://localhost:27017/NewsPortal"
+        "url": "mongodb://NodeServer:xfjaA241vyOn41Hp@newsportal-shard-00-00-ckj81.mongodb.net:27017,newsportal-shard-00-01-ckj81.mongodb.net:27017,newsportal-shard-00-02-ckj81.mongodb.net:27017/NewsPortalDataBase?ssl=true&replicaSet=NewsPortal-shard-0&authSource=admin"
     },
     "viewsFolder": "./public",
     "viewArticlesDefaultAmount": 10,
