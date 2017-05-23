@@ -11,13 +11,19 @@
 
   function showArticleDetailViewHandler(event) {
     const t = event.target;
-    if (t.className !== 'show-more-article-button' &&
-      t.tagName !== 'H2' &&
-      t.className !== 'post-image') {
-      return;
+    const isButton = t.className === 'show-more-article-button';
+    const isTitle = t.tagName === 'H2';
+    const isPostImg = t.className === 'post-image';
+
+    if (!isButton && !isTitle && !isPostImg) return;
+
+    let id;
+    if (isTitle || isPostImg) {
+      id = t.parentNode.parentNode.id;
+    } else {
+      id = t.parentNode.id;
     }
 
-    const id = t.parentNode.id;
     currentArticleId = id;
     OPERATION = 'EDIT';
 

@@ -112,7 +112,6 @@ const articleList = (function () {
     document.body.style.overflowY = '';
   }
 
-
   function tagClickHandler(event) {
     const t = event.target;
     if (t.tagName !== 'H1' && t.className !== 'header-tag-button') {
@@ -170,13 +169,14 @@ const articleList = (function () {
   }
 
   function paginationClickHandler(event) {
-    if (Number(event.target.textContent)) {
-      paginationPosition = Number(event.target.textContent) - 1;
+    const t = event.target;
+    if (Number(t.textContent)) {
+      paginationPosition = Number(t.textContent) - 1;
       displayArticleList();
-    } else if (event.target.id === 'prev-page') {
+    } else if (t.id === 'prev-page') {
       paginationPosition--;
       displayArticleList();
-    } else if (event.target.id === 'next-page') {
+    } else if (t.id === 'next-page') {
       paginationPosition++;
       displayArticleList();
     }

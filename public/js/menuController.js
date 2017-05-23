@@ -28,14 +28,10 @@
   }
 
   const burgerButton = heyId('burger-menu-button');
-  burgerButton.addEventListener('click', () => {
-    openMenu();
-  });
+  burgerButton.addEventListener('click', openMenu);
 
   const closeMenuButton = heyId('close-main-menu-button');
-  closeMenuButton.addEventListener('click', () => {
-    closeMenu();
-  });
+  closeMenuButton.addEventListener('click', closeMenu);
 
   function tagClickHandler(event) {
     const cl = event.target.className;

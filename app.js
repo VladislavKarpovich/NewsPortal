@@ -21,4 +21,5 @@ app.use((err, req, res, next) => {
   log.error(err);
 });
 
-app.listen(config.get('port'), () => log.info(`listening port ${config.get('port')}`));
+const port = process.env.PORT || config.get('port');
+app.listen(port, () => log.info(`listening port ${port}`));
