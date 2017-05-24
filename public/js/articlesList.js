@@ -1,6 +1,12 @@
 const articleList = (function () {
   const ARTICLES_AMOUNT = 5;
-  const TAGS = ['Разработка', 'Администрирование', 'Дизайн', 'Управление', 'Маркетинг'];
+  const TAGS = [
+    'Разработка',
+    'Администрирование',
+    'Дизайн',
+    'Управление',
+    'Маркетинг',
+  ];
   const CONTAINER_CLASSES = [
     '.development-article-list',
     '.administration-article-list',
@@ -14,29 +20,35 @@ const articleList = (function () {
   let paginationPagesAmount = 1;
 
   function displayMainPage() {
-    requests.getArticles({ skip: 0, amount: 8 }).then(
-      (res) => {
-        const container = heyQuery('.last-article-list');
-        displayArticles(container, res.articles);
-      },
-      status => messageService.showErrorForm(status)
-    );
+    addArticlesToTagContainer(null, '.last-article-list');
 
-    for (let i = 0; i < CONTAINER_CLASSES.length; i++) {
-      const options = { skip: 0, amount: 4, tags: [TAGS[i]] };
-      requests.getArticles(options).then(
-        (res) => {
-          const container = heyQuery(CONTAINER_CLASSES[i]);
-          displayArticles(container, res.articles);
-        },
-        status => messageService(status)
-      );
+    const l = CONTAINER_CLASSES.length;
+    for (let i = 0; i < l; i++) {
+      const tag = TAGS[i];
+      const containerClass = CONTAINER_CLASSES[i];
+      addArticlesToTagContainer(tag, containerClass);
     }
 
     showMainPage();
     activateHeaderButton('Главная');
     heyId('message-overlay').style.display = 'none';
     hidePostPageForm();
+  }
+
+  function addArticlesToTagContainer(tag, contClass) {
+    const options = { skip: 0, amount: 8 };
+    if (tag) {
+      options.tags = [tag];
+      options.amount = 4;
+    }
+
+    requests.getArticles(options).then(
+      (res) => {
+        const container = heyQuery(contClass);
+        displayArticles(container, res.articles);
+      },
+      status => messageService(status)
+    );
   }
 
   function displayArticles(container, articles) {
@@ -58,17 +70,23 @@ const articleList = (function () {
   }
 
   function convertToHTML(article) {
+    const id = article._id;
+    const img = article.img;
+    const title = article.title;
+    const shortDescr = article.shortDescription;
+    const author = article.author;
+    const date = convDate(article.createdAt);
+    const tags = article.tags.join(' ').trim();
+
     const temp = heyQuery('#template-article-item').content;
-    temp.querySelector('article').id = article._id;
-    temp.querySelector('.post-image').src = article.img;
-    temp.querySelector('h2').textContent = article.title;
-    temp.querySelector('p').textContent = article.shortDescription;
-    temp.querySelector('.author-name').textContent = article.author;
-    temp.querySelector('.publication-date').textContent = convDate(article.createdAt);
-    temp.querySelector('.post-tags').textContent = '';
-    article.tags.forEach((item) => {
-      temp.querySelector('.post-tags').textContent += ` ${item}`;
-    });
+    temp.querySelector('article').id = id;
+    temp.querySelector('.post-image').src = img;
+    temp.querySelector('h2').textContent = title;
+    temp.querySelector('p').textContent = shortDescr;
+    temp.querySelector('.author-name').textContent = author;
+    temp.querySelector('.publication-date').textContent = date;
+    temp.querySelector('.post-tags').textContent = tags;
+
     return temp.querySelector('article').cloneNode(true);
   }
 
@@ -88,22 +106,23 @@ const articleList = (function () {
 
   function activateHeaderButton(buttonText) {
     const button = findHeaderButton(buttonText);
-    if (button) {
-      deactivateHeaderButtons();
-      button.classList.add('active-button');
-    }
+    if (!button) return;
+
+    deactivateHeaderButtons();
+    button.classList.add('active-button');
   }
 
   function findHeaderButton(buttonText) {
-    const buttons = queryAll('#header-menu nav button');
-    return [].find.call(buttons, item => item.textContent === buttonText);
+    const bs = queryAll('#header-menu nav button');
+    const find = Array.prototype.find.call;
+    return find(bs, a => a.textContent === buttonText);
   }
 
   function deactivateHeaderButtons() {
-    const buttons = queryAll('#header-menu nav button.active-button');
-    [].forEach.call(buttons, (item) => {
-      item.classList.remove('active-button');
-    });
+    const query = '#header-menu nav button.active-button';
+    const bs = queryAll(query);
+    const forEach = Array.prototype.forEach.call;
+    forEach(bs, a => a.classList.remove('active-button'));
   }
 
   function hidePostPageForm() {
@@ -114,15 +133,18 @@ const articleList = (function () {
 
   function tagClickHandler(event) {
     const t = event.target;
-    if (t.tagName !== 'H1' && t.className !== 'header-tag-button') {
-      return;
-    }
+    const isMenuTag = t.tagName === 'H1';
+    const isPageTag = t.className === 'header-tag-button';
+    if (!isMenuTag && !isPageTag) return;
 
     paginationPosition = 0;
-    const option = event.target.textContent.split(' ')[0];
+    const option = t.textContent.split(' ')[0];
     activateHeaderButton(option);
     hidePostPageForm();
+    displayArticlesPage();
+  }
 
+  function displayArticlesPage(option) {
     switch (option) {
       case 'Главная':
         filter = null;
@@ -142,30 +164,46 @@ const articleList = (function () {
 
   function filterArticesHandler() {
     const form = heyId('filter-form');
-    const tags = [];
     filter = {};
-    [].forEach.call(form.querySelectorAll('label'), (item) => {
-      if (item.querySelector('input').checked) {
-        tags.push(item.textContent);
-      }
-    });
-    if (tags.length > 0) {
-      filter.tags = tags;
-    }
+    filter.tags = getFilterTags();
     if (form.author.value !== 'Все') {
       filter.author = form.author.value;
     }
-    let date = new Date(form.dateFrom.value);
-    if (date.toString() !== 'Invalid Date') {
-      filter.dateFrom = date;
-    }
-    date = new Date(form.dateTo.value);
-    if (date.toString() !== 'Invalid Date') {
-      filter.dateTo = date;
-    }
+
 
     paginationPosition = 0;
     displayArticleList();
+  }
+
+  function getFilterTags() {
+    const tags = [];
+    const form = heyId('filter-form');
+    const forEach = Array.prototype.forEach.call;
+    const labels = form.querySelectorAll('label');
+
+    forEach(labels, (label) => {
+      const isChecked = label.querySelector('input').checked;
+      const tag = label.textContent;
+      if (isChecked) tags.push(tag);
+    });
+
+    if (tags.length === 0) return null;
+    return tags;
+  }
+
+  function getFilterDate() {
+    const form = heyId('filter-form');
+    const res = {};
+    const dateFrom = new Date(form.dateFrom.value);
+    if (dateFrom.toString() !== 'Invalid Date') {
+      res.dateFrom = dateFrom;
+    }
+    const dateTo = new Date(form.dateTo.value);
+    if (dateTo.toString() !== 'Invalid Date') {
+      res.dateTo = dateTo;
+    }
+
+    return res;
   }
 
   function paginationClickHandler(event) {
@@ -187,35 +225,34 @@ const articleList = (function () {
     options.skip = ARTICLES_AMOUNT * paginationPosition;
     options.amount = ARTICLES_AMOUNT;
 
-    requests.getArticles(options).then(
-      (res) => {
-        showArticleList(res.articles);
-
-        paginationPagesAmount = Math.ceil(res.amount / ARTICLES_AMOUNT);
-
-        addPagination(paginationPagesAmount);
-        activatePaginationButton(paginationPosition, paginationPagesAmount - 1);
-      },
-      status => messageService.showErrorForm(status)
-    );
+    requests.getArticles(options)
+      .then(showPaginationPage, messageService.showErrorForm);
     window.scrollTo(0, 0);
   }
 
+  function showPaginationPage(res) {
+    showArticleList(res.articles);
+    paginationPagesAmount = Math.ceil(res.amount / ARTICLES_AMOUNT);
+    addPagination(paginationPagesAmount);
+    activatePaginationButton(paginationPosition, paginationPagesAmount - 1);
+  }
+
   function addPagination(amount) {
-    if (amount > 1) {
-      let html = '';
-      for (let i = 0; i < amount; i++) {
-        html += `<a>${i + 1}</a>`;
-      }
-      heyQuery('#pagination .pages').innerHTML = html;
-      heyId('pagination').style.display = 'block';
-    } else {
+    if (amount <= 1) {
       heyId('pagination').style.display = 'none';
+      return;
     }
+    let html = '';
+    for (let i = 0; i < amount; i++) {
+      html += `<a>${i + 1}</a>`;
+    }
+    heyQuery('#pagination .pages').innerHTML = html;
+    heyId('pagination').style.display = 'block';
   }
 
   function activatePaginationButton(number, max) {
     queryAll('#pagination .pages .active').className = '';
+    if (max === 0) return;
     queryAll('#pagination .pages a')[number].className = 'active';
 
     heyId('prev-page').style.display = number === 0 ? 'none' : 'block';
