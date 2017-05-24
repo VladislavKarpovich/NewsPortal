@@ -53,7 +53,8 @@
   }
 
   function init() {
-    requests.getAuthors().then(initAuthorsFilter, console.log);
+    requests.getAuthors()
+      .then(initAuthorsFilter, messageService.showErrorForm);
   }
 
   init();
