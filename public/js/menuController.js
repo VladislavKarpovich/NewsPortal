@@ -36,7 +36,10 @@
   function tagClickHandler(event) {
     const cl = event.target.className;
     const id = event.target.id;
-    if (cl === 'header-tag-button' || id === 'filter-form-button-ok') {
+
+    const isTagButton = cl === 'header-tag-button';
+    const isOkButton = id === 'filter-form-button-ok';
+    if (isTagButton || isOkButton) {
       closeMenu();
     }
   }
