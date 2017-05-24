@@ -114,8 +114,8 @@ const articleList = (function () {
 
   function findHeaderButton(buttonText) {
     const bs = queryAll('#header-menu nav button');
-    const find = Array.prototype.find.call;
-    return find(bs, a => a.textContent === buttonText);
+    const find = Array.prototype.find;
+    return find.call(bs, a => a.textContent === buttonText);
   }
 
   function deactivateHeaderButtons() {
