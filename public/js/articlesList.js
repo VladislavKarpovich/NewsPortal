@@ -6,7 +6,6 @@ const articleList = (function () {
   let paginationPagesAmount = 1;
 
   function displayArticles(container, articles) {
-    container.innerHTML = '';
     if (!articles) return;
 
     articles.forEach((item) => {
@@ -89,7 +88,6 @@ const articleList = (function () {
       filter.author = form.author.value;
     }
 
-
     paginationPosition = 0;
     displayArticleList();
   }
@@ -129,14 +127,13 @@ const articleList = (function () {
     const t = event.target;
     if (Number(t.textContent)) {
       paginationPosition = Number(t.textContent) - 1;
-      displayArticleList();
     } else if (t.id === 'prev-page') {
       paginationPosition--;
-      displayArticleList();
     } else if (t.id === 'next-page') {
       paginationPosition++;
-      displayArticleList();
     }
+
+    displayArticleList();
   }
 
   function displayArticleList() {
@@ -146,7 +143,10 @@ const articleList = (function () {
 
     requests.getArticles(options)
       .then(showPaginationPage, messageService.showErrorForm);
+
     window.scrollTo(0, 0);
+    heyId('article-list-page-loader').style.display = 'block';
+    heyId('article-list-container').innerHTML = '';
   }
 
   function showPaginationPage(res) {
@@ -154,6 +154,7 @@ const articleList = (function () {
     paginationPagesAmount = Math.ceil(res.amount / ARTICLES_AMOUNT);
     addPagination(paginationPagesAmount);
     activatePaginationButton(paginationPosition, paginationPagesAmount - 1);
+    heyId('article-list-page-loader').style.display = 'none';
   }
 
   function addPagination(amount) {
