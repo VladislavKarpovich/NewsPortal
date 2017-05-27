@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="css/editForm.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/loginForm.css">
-    <link rel="stylesheet" href="css/mainPage.css">
     <link rel="stylesheet" href="css/messageForms.css">
     <link rel="stylesheet" href="css/page.css">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/spinner.css">
 
     <link rel="stylesheet" href="css/media.css">
     <link rel="stylesheet" href="css/animation.css">
@@ -24,28 +24,25 @@
 </head>
 
 <body>
-    <div class="header-line">
-        <header>
-            <a class="logo">News</a>
-            <img src="img/menu-icon.png" alt="menu" id="burger-menu-button">
-            <div class="header-user-panel-container">
-                <img src="img/user-iconW.png" alt="" id="log-in-button">
-                <div class="header-user-panel" id="header-user-panel">
-                    <img src="img/user-icon.png" alt="" class="user-panel-image">
-                    <h1>User Name</h1>
-                    <p>usermail@mail.com</p>
-                    <button type="button" class="header-user-panel-button" id="user-panel-add-article-button">Добавить новость</button>
-                    <button type="button" class="header-user-panel-button" id="user-panel-out-button">Выйти</button>
-                </div>
+    <header class="header-line">
+        <a class="logo">News</a>
+        <img src="img/menu-icon.png" alt="menu" id="burger-menu-button">
+        <div class="header-user-panel-container">
+            <img src="img/user-iconW.png" alt="" id="log-in-button">
+            <div class="header-user-panel" id="header-user-panel">
+                <img src="img/user-icon.png" alt="" class="user-panel-image">
+                <h1>User Name</h1>
+                <p>usermail@mail.com</p>
+                <button type="button" class="header-user-panel-button" id="user-panel-add-article-button">Добавить новость</button>
+                <button type="button" class="header-user-panel-button" id="user-panel-out-button">Выйти</button>
             </div>
-        </header>
-    </div>
+        </div>
+    </header>
 
     <menu id="main-menu">
         <img src="img/closeMenu.png" alt="" id="close-main-menu-button">
         <h1>Меню</h1>
         <nav>
-            <button class="header-tag-button">Главная</button>
             <button class="header-tag-button">Последние</button>
             <button class="header-tag-button">Разработка</button>
             <button class="header-tag-button">Администрирование</button>
@@ -74,60 +71,14 @@
         </form>
     </menu>
 
-    <main>
-        <div id="main-page" class="main-page">
-            <h1>Последние новости</h1>
-            <section>
-                <div class="last-article-list multisize-article-container"></div>
-                <div class="clearfix"></div>
-            </section>
-
-            <h1>Разработка</h1>
-            <section>
-                <div class="development-article-list"></div>
-                <div class="clearfix"></div>
-            </section>
-
-            <h1>Администрирование</h1>
-            <section>
-                <div class="administration-article-list"></div>
-                <div class="clearfix"></div>
-            </section>
-
-            <h1>Дизайн</h1>
-            <section>
-                <div class="design-article-list"></div>
-                <div class="clearfix"></div>
-            </section>
-
-            <h1>Управление</h1>
-            <section>
-                <div class="management-article-list"></div>
-                <div class="clearfix"></div>
-            </section>
-
-            <h1>Маркетинг</h1>
-            <section>
-                <div class="marketing-article-list"></div>
-                <div class="clearfix"></div>
-            </section>
-
-            <h1>Другое</h1>
-            <section>
-                <div class="other-article-list"></div>
-                <div class="clearfix"></div>
-            </section>
-        </div>
-
-        <div id="article-list-page" class="display-none">
-            <section class="article-list">
-            </section>
-            <div class="clearfix"></div>
-            <nav id="pagination">
-                <a id="prev-page">&laquo;</a>
-                <span class="pages"></span>
-                <a id="next-page">&raquo;</a>
-            </nav>
+    <main id="article-list-page" class="display-none">
+        <section class="article-list">
+        </section>
+        <div class="clearfix"></div>
+        <div id="pagination">
+            <span id="prev-page">&laquo;</span>
+            <span class="pages"></span>
+            <span id="next-page">&raquo;</span>
         </div>
     </main>
 
@@ -140,14 +91,11 @@
     <!-- article template -->
     <template id="template-article-item">
         <article>
+            <h2></h2>
             <div class="image-container">
                 <img src="" alt="" class="post-image">
             </div>
-            <div class="text-containers">
-                <h2></h2>
-                <p></p>
-                <div class="clearfix"></div>
-            </div>
+            <p></p>
             <div class="author-name"></div>
             <div class="publication-date"></div>
             <div class="post-tags"></div>
@@ -262,6 +210,7 @@
         <button type="button" id="url-input-cancel-button">Отмена</button>
     </form>
 
+    <script type="text/javascript" src="js/utils.js"></script>
     <script type="text/javascript" src="js/messageService.js"></script>
     <script type="text/javascript" src="js/requests.js"></script>
     <script type="text/javascript" src="js/user.js"></script>

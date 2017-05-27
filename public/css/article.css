@@ -1,45 +1,52 @@
-article {
-    overflow: hidden;
-    margin: 0.5%;
-    float: left;
+#article-list-page .article-list article {
+    flex: 1 1 35em;
+    border-bottom: 2px #00695C solid; 
+    margin: 1em;
+    padding: 0.5em;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 article h2 {
-    margin: 0.5em;
-    padding-bottom: 0;
-    padding-top: 0.5em;
+    margin: 0.5em 0;
+    padding: 0.5em 0;
     text-align: justify;
     font-size: 1.1em;
     font-family: Calibri Light;
     cursor: pointer;
+    text-align: center;
+    width: 100%;
 }
 
 article .image-container {
-    overflow: hidden;
+   margin: 10px;
+   flex: 1 1 20em;
+   max-height: 25em;
+   overflow: hidden;
+   cursor: pointer;
 }
+
 
 article .post-image {
     width: 100%;
+    height: auto;
 }
 
 article p {
     margin: 0.5em;
     font-size: 0.9em;
-    padding-left: 1em;
-    padding-right: 1em;
+    flex: 1 1 20em;
 }
 
 .publication-date,
 .author-name,
 .post-tags {
-    height: 3%;
-    width: 100%;
-    padding-right: 1em;
+    padding-right: 3em;
     text-align: right;
     font-size: 0.7em;
     text-decoration: none;
     color: #999;
-    float: right;
+    flex: 1 1 100%;
 }
 
 .post-tags {
@@ -64,9 +71,8 @@ article p {
     cursor: pointer;
     padding: 0.4em 1.25em;
     border-radius: 10px;
-    float: right;
-    cursor: pointer;
-    margin: 1em;
+    margin: 1em auto;
+    flex: 1 1 100%;
 }
 
 .show-more-article-button:hover {
