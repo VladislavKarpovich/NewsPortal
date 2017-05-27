@@ -1,55 +1,9 @@
 const articleList = (function () {
-  const ARTICLES_AMOUNT = 5;
-  const TAGS = [
-    'Разработка',
-    'Администрирование',
-    'Дизайн',
-    'Управление',
-    'Маркетинг',
-  ];
-  const CONTAINER_CLASSES = [
-    '.development-article-list',
-    '.administration-article-list',
-    '.design-article-list',
-    '.management-article-list',
-    '.marketing-article-list',
-  ];
+  const ARTICLES_AMOUNT = 6;
 
   let filter = {};
   let paginationPosition = 0;
   let paginationPagesAmount = 1;
-
-  function displayMainPage() {
-    addArticlesToTagContainer(null, '.last-article-list');
-
-    const l = CONTAINER_CLASSES.length;
-    for (let i = 0; i < l; i++) {
-      const tag = TAGS[i];
-      const containerClass = CONTAINER_CLASSES[i];
-      addArticlesToTagContainer(tag, containerClass);
-    }
-
-    showMainPage();
-    activateHeaderButton('Главная');
-    heyId('message-overlay').style.display = 'none';
-    hidePostPageForm();
-  }
-
-  function addArticlesToTagContainer(tag, contClass) {
-    const options = { skip: 0, amount: 8 };
-    if (tag) {
-      options.tags = [tag];
-      options.amount = 4;
-    }
-
-    requests.getArticles(options).then(
-      (res) => {
-        const container = heyQuery(contClass);
-        displayArticles(container, res.articles);
-      },
-      status => messageService(status)
-    );
-  }
 
   function displayArticles(container, articles) {
     container.innerHTML = '';
@@ -62,7 +16,6 @@ const articleList = (function () {
   }
 
   function showArticleList(articles) {
-    heyId('main-page').style.display = 'none';
     heyId('article-list-page').style.display = 'block';
     heyId('post-page').style.display = 'none';
     const container = heyClassName('article-list')[0];
@@ -98,31 +51,10 @@ const articleList = (function () {
       (`0${date.getUTCMinutes()}`).slice(-2)}`;
   }
 
-  function showMainPage() {
-    heyId('main-page').style.display = 'block';
-    heyId('article-list-page').style.display = 'none';
-    heyId('post-page').style.display = 'none';
-  }
-
-  function activateHeaderButton(buttonText) {
-    const button = findHeaderButton(buttonText);
-    if (!button) return;
-
-    deactivateHeaderButtons();
-    button.classList.add('active-button');
-  }
-
   function findHeaderButton(buttonText) {
     const bs = queryAll('#header-menu nav button');
     const find = Array.prototype.find;
     return find.call(bs, a => a.textContent === buttonText);
-  }
-
-  function deactivateHeaderButtons() {
-    const query = '#header-menu nav button.active-button';
-    const bs = queryAll(query);
-    const forEach = Array.prototype.forEach.call;
-    forEach(bs, a => a.classList.remove('active-button'));
   }
 
   function hidePostPageForm() {
@@ -138,28 +70,15 @@ const articleList = (function () {
     if (!isMenuTag && !isPageTag) return;
 
     paginationPosition = 0;
-    const option = t.textContent.split(' ')[0];
-    activateHeaderButton(option);
+    const option = t.textContent;
     hidePostPageForm();
-    displayArticlesPage();
+    displayArticlesPage(option);
   }
 
   function displayArticlesPage(option) {
-    switch (option) {
-      case 'Главная':
-        filter = null;
-        displayMainPage();
-        break;
-      case 'Последние':
-        filter = null;
-        displayArticleList();
-        break;
-      default:
-        filter = {
-          tags: [option],
-        };
-        displayArticleList();
-    }
+    if (option === 'Последние') filter = null;
+    else filter = { tags: [option] };
+    displayArticleList();
   }
 
   function filterArticesHandler() {
@@ -247,7 +166,7 @@ const articleList = (function () {
       html += `<a>${i + 1}</a>`;
     }
     heyQuery('#pagination .pages').innerHTML = html;
-    heyId('pagination').style.display = 'block';
+    heyId('pagination').style.display = 'flex';
   }
 
   function activatePaginationButton(number, max) {
@@ -259,31 +178,13 @@ const articleList = (function () {
     heyId('next-page').style.display = number === max ? 'none' : 'block';
   }
 
-  function heyId(id) {
-    return document.getElementById(id);
-  }
-
-  function heyClassName(className) {
-    return document.getElementsByClassName(className);
-  }
-
-  function heyQuery(query) {
-    return document.querySelector(query);
-  }
-
-  function queryAll(query) {
-    return document.querySelectorAll(query);
-  }
-
   heyId('main-menu').addEventListener('click', tagClickHandler);
-  heyId('main-page').addEventListener('click', tagClickHandler);
   heyId('filter-form-button-ok').addEventListener('click', filterArticesHandler);
-  heyId('message-form-ok-button').addEventListener('click', displayMainPage);
   heyId('pagination').addEventListener('click', paginationClickHandler);
 
-  displayMainPage();
+  displayArticleList();
 
   return {
-    displayMainPage,
+    displayArticleList,
   };
 }());

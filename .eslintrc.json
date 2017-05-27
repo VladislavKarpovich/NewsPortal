@@ -20,6 +20,10 @@
         "XMLHttpRequest": false,
         "requests": false,
         "messageService": false,
-        "articleList": false
+        "articleList": false,
+        "heyId": false,
+        "heyClassName": false,
+        "heyQuery": false,
+        "queryAll": false
     }    
 }

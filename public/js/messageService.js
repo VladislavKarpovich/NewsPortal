@@ -51,10 +51,6 @@ const messageService = (function () {
     heyId('message-overlay').style.display = 'none';
   }
 
-  function heyId(id) {
-    return document.getElementById(id);
-  }
-
   heyId('message-form-ok-button').addEventListener('click', hideMessageForm);
   heyId('message-overlay').addEventListener('click', () => {
     hideErrorForm();

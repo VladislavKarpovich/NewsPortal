@@ -10,31 +10,37 @@
   const form = heyId('edit-form');
 
   function showArticleDetailViewHandler(event) {
+    const id = getArticleId(event);
+    if (!id) return;
+
+    currentArticleId = id;
+    OPERATION = 'EDIT';
+    requests.getArticle(id)
+      .then(displayPostPage, articleNotFound);
+  }
+
+  function getArticleId(event) {
     const t = event.target;
     const isButton = t.className === 'show-more-article-button';
     const isTitle = t.tagName === 'H2';
     const isPostImg = t.className === 'post-image';
 
-    if (!isButton && !isTitle && !isPostImg) return;
+    if (!isButton && !isTitle && !isPostImg) return null;
+    if (isButton) return t.parentNode.id;
+    return t.parentNode.parentNode.id;
+  }
 
-    let id;
-    if (isTitle || isPostImg) {
-      id = t.parentNode.parentNode.id;
-    } else {
-      id = t.parentNode.id;
-    }
+  function displayPostPage(article) {
+    displayPostPageForm(article);
+    const images = queryAll('#edit-form-images-container div');
+    const forEach = Array.prototype.forEach;
+    forEach.call(images, item =>
+      item.addEventListener('click', deleteImageBlock));
+  }
 
-    currentArticleId = id;
-    OPERATION = 'EDIT';
-
-    requests.getArticle(id).then(
-      (article) => {
-        displayPostPageForm(article);
-        const images = queryAll('#edit-form-images-container div');
-        [].forEach.call(images, item => item.addEventListener('click', deleteImageBlock));
-      },
-      status => messageService.showErrorForm(`Статья не найдена. ${status}`)
-    );
+  function articleNotFound(status) {
+    const message = `Статья не найдена. ${status}`;
+    messageService.showErrorForm(message);
   }
 
   function displayPostPageForm(article) {
@@ -49,22 +55,30 @@
     initDetailViewTags(article ? article.tags || [] : ['Другое']);
 
     if (article) {
-      const blocks = article.text.replace(/<(?:.|\n)*?>/gm, '#').split('#');
-      const text = blocks.join('\n').replace(/[\n]+/g, '\n');
-      const textHtml = article.text;
-
-      postNameChanged(article.title);
-      form.postName.value = article.title;
-      shortDiscriptionChanged(article.shortDescription);
-      form.shortDiscription.value = article.shortDescription;
-      textContentChanged(textHtml);
-      form.text.value = text;
-
-      cont.querySelector('.author-name').textContent = article.author;
-      initDetailViewImages(article.images);
+      displayArticlePostPageForm(article);
       return;
     }
+    displayEmptyPostPageForm();
+  }
 
+  function displayArticlePostPageForm(article) {
+    const blocks = article.text.replace(/<(?:.|\n)*?>/gm, '#').split('#');
+    const text = blocks.join('\n').replace(/[\n]+/g, '\n');
+    const textHtml = article.text;
+
+    postNameChanged(article.title);
+    form.postName.value = article.title;
+    shortDiscriptionChanged(article.shortDescription);
+    form.shortDiscription.value = article.shortDescription;
+    textContentChanged(textHtml);
+    form.text.value = text;
+
+    const cont = heyId('post-page');
+    cont.querySelector('.author-name').textContent = article.author;
+    initDetailViewImages(article.images);
+  }
+
+  function displayEmptyPostPageForm(article) {
     postNameChanged('');
     form.postName.value = '';
     shortDiscriptionChanged('');
@@ -74,6 +88,7 @@
     initDetailViewImages([]);
 
     const username = heyQuery('.header-user-panel-container h1').textContent;
+    const cont = heyId('post-page');
     cont.querySelector('.author-name').textContent = username;
   }
 
@@ -322,22 +337,6 @@
     requests.getArticleFormMeduza(url)
       .then(displayPostPageForm, messageService.showErrorForm);
     messageService.hideUrlInputForm();
-  }
-
-  function heyId(id) {
-    return document.getElementById(id);
-  }
-
-  function heyClassName(className) {
-    return document.getElementsByClassName(className);
-  }
-
-  function heyQuery(query) {
-    return document.querySelector(query);
-  }
-
-  function queryAll(query) {
-    return document.querySelectorAll(query);
   }
 
   const mainBlock = document.querySelector('main');

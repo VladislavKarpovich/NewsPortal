@@ -56,14 +56,6 @@
     heyId('message-overlay').style.display = 'none';
   }
 
-  function heyId(id) {
-    return document.getElementById(id);
-  }
-
-  function heyClassName(className) {
-    return document.getElementsByClassName(className);
-  }
-
   function getUser() {
     requests.getUser()
       .then(userLoadHandle, messageService.showErrorForm);
