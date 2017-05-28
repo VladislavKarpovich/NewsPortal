@@ -88,7 +88,7 @@ function editArticle(req, res) {
 
   const article = req.body;
   const id = req.params.id;
-  Articles.findOneAndUpdate(id, article, (err, result) => {
+  Articles.findOneAndUpdate({ _id: id }, article, (err, result) => {
     if (err) return res.status(500).end();
     return res.status(200).json(result);
   });
