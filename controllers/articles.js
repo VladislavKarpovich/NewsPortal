@@ -1,6 +1,5 @@
 const Articles = require('../models/Article').Articles;
 const config = require('../config');
-const ObjectID = require('mongodb').ObjectID;
 
 const MAX_DATE = 8640000000000000;
 

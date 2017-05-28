@@ -283,7 +283,6 @@
       images: getImages(),
       tags: getTags(),
     };
-    console.log('edit!');
 
     const exclamationForm = heyId('exclamation-form-ok-button');
     exclamationForm.removeEventListener('click', editArticle);
