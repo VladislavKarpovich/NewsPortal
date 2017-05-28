@@ -158,6 +158,9 @@
         case 'Маркетинг':
           tagsCheckBoxes[4].checked = true;
           break;
+        case 'Другое':
+          tagsCheckBoxes[5].checked = true;
+          break;
         default:
       }
     });
@@ -280,6 +283,7 @@
       images: getImages(),
       tags: getTags(),
     };
+    console.log('edit!');
 
     const exclamationForm = heyId('exclamation-form-ok-button');
     exclamationForm.removeEventListener('click', editArticle);
