@@ -59,6 +59,22 @@ const messageService = (function () {
     hideUrlInputForm();
   });
 
+  function showLoader() {
+    heyId('loader-form').style.display = 'block';
+    heyId('checkmark').style.display = 'none';
+    heyId('circle-loader').classList.remove('load-complete');
+    heyId('loader-overlay').style.display = 'block';
+  }
+
+  function hideLoader() {
+    heyId('checkmark').style.display = 'block';
+    heyId('circle-loader').classList.add('load-complete');
+    setTimeout(() => {
+      heyId('loader-form').style.display = 'none';
+      heyId('loader-overlay').style.display = 'none';
+    }, 1250);
+  }
+
   heyId('error-form-ok-button').addEventListener('click', hideErrorForm);
   heyId('exclamation-form-cancel-button').addEventListener('click', hideExclamationForm);
   heyId('exclamation-form-ok-button').addEventListener('click', hideExclamationForm);
@@ -72,6 +88,8 @@ const messageService = (function () {
     showMessageForm,
     hideMessageForm,
     showUrlInputForm,
-    hideUrlInputForm
+    hideUrlInputForm,
+    showLoader,
+    hideLoader,
   };
 }());
