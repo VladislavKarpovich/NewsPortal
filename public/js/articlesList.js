@@ -68,9 +68,8 @@ const articleList = (function () {
 
   function tagClickHandler(event) {
     const t = event.target;
-    const isMenuTag = t.tagName === 'H1';
-    const isPageTag = t.className === 'header-tag-button';
-    if (!isMenuTag && !isPageTag) return;
+    const isMenuTag = t.className === 'header-tag-button';
+    if (!isMenuTag) return;
 
     paginationPosition = 0;
     const option = t.textContent;
