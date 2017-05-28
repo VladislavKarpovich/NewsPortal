@@ -17,6 +17,8 @@
     OPERATION = 'EDIT';
     requests.getArticle(id)
       .then(displayPostPage, articleNotFound);
+
+    messageService.showLoader();
   }
 
   function getArticleId(event) {
@@ -31,6 +33,7 @@
   }
 
   function displayPostPage(article) {
+    messageService.hideLoader();
     displayPostPageForm(article);
     const images = queryAll('#edit-form-images-container div');
     const forEach = Array.prototype.forEach;
@@ -55,11 +58,8 @@
     cont.querySelector('.publication-date').textContent = date;
     initDetailViewTags(article ? article.tags || [] : ['Другое']);
 
-    if (article) {
-      displayArticlePostPageForm(article);
-      return;
-    }
-    displayEmptyPostPageForm();
+    if (article) displayArticlePostPageForm(article);
+    else displayEmptyPostPageForm();
   }
 
   function displayArticlePostPageForm(article) {
@@ -94,6 +94,7 @@
   }
 
   function initDetailViewImages(images) {
+    heyId('edit-form-images-container').innerHTML = '';
     if (!images.length) {
       heyQuery('#post-page .image-container').style.display = 'none';
       heyId('dots-container').style.display = 'none';
@@ -102,7 +103,6 @@
 
     let slidesHtml = '';
     let dotsHtml = '';
-    heyId('edit-form-images-container').innerHTML = '';
 
     for (let i = 0; i < images.length; i++) {
       slidesHtml += `<div class="slides fade"><img src="${images[i]}"></div>`;
@@ -192,12 +192,11 @@
   }
 
   function postNameChanged(text) {
+    currentArticleHtml.querySelector('h1').textContent = text;
     if ((text.length > TITLE_MAX_SIZE) || (text.length === 0)) {
       form.postName.className = 'wrong';
       return;
     }
-
-    currentArticleHtml.querySelector('h1').textContent = text;
     form.postName.className = '';
   }
 
@@ -293,18 +292,26 @@
 
   function deleteArticleHandler() {
     messageService.showExclamationForm('Удалить новость?', 'Удаление');
-    heyId('exclamation-form-ok-button').addEventListener('click', handler);
+    heyId('exclamation-form-ok-button').addEventListener('click', deleteArticle);
+  }
 
-    function handler() {
-      heyId('exclamation-form-ok-button').removeEventListener('click', handler);
-      requests.deleteArticle(currentArticleId).then(
-        () => {
-          messageService.showMessageForm('Новость успешно удалена из ленты.', 'Готово');
-          articleList.displayMainPage();
-        },
-        status => messageService.showErrorForm(`Ошибка удаления${status}`)
-      );
-    }
+  function deleteArticle() {
+    heyId('exclamation-form-ok-button').removeEventListener('click', deleteArticle);
+    messageService.showLoader();
+    requests.deleteArticle(currentArticleId)
+      .then(articleDeletedHandle, articleDeletingErrorHandle);
+  }
+
+  function articleDeletedHandle() {
+    messageService.hideLoaderSuccessful();
+    articleList.displayArticleList();
+    document.body.style.overflowY = '';
+  }
+
+  function articleDeletingErrorHandle(status) {
+    messageService.hideLoader();
+    messageService.showErrorForm(status, 'Ошибка удаления!');
+    document.body.style.overflowY = '';
   }
 
   function getImages() {
@@ -335,8 +342,10 @@
     heyId('url-input-form-ok-button').removeEventListener('click', loadFromMeduzaHandler);
     let url = heyQuery('#url-input-form input').value;
     url = url.replace('https://meduza.io/', '');
+
     requests.getArticleFormMeduza(url)
       .then(displayPostPageForm, getDataFromMeduzaError);
+
     messageService.hideUrlInputForm();
     messageService.showLoader();
   }
