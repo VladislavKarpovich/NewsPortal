@@ -5,9 +5,8 @@ const articleList = (function () {
   let paginationPosition = 0;
   let paginationPagesAmount = 1;
 
-  function displayArticles(container, articles) {
-    if (!articles) return;
-
+  function displayArticles(articles) {
+    const container = heyClassName('article-list')[0];
     articles.forEach((item) => {
       const html = convertToHTML(item);
       container.appendChild(html);
@@ -17,8 +16,13 @@ const articleList = (function () {
   function showArticleList(articles) {
     heyId('article-list-page').style.display = 'block';
     heyId('post-page').style.display = 'none';
-    const container = heyClassName('article-list')[0];
-    displayArticles(container, articles);
+
+    if (!articles || !articles.length) {
+      heyId('article-not-found-message').style.display = 'block';
+      return;
+    }
+    heyId('article-not-found-message').style.display = 'none';
+    displayArticles(articles);
   }
 
   function convertToHTML(article) {
