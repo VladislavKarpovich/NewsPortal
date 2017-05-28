@@ -173,7 +173,7 @@ const articleList = (function () {
     }
     let html = '';
     for (let i = 0; i < amount; i++) {
-      html += `<a>${i + 1}</a>`;
+      html += `<span>${i + 1}</span>`;
     }
     heyQuery('#pagination .pages').innerHTML = html;
     heyId('pagination').style.display = 'flex';
@@ -182,7 +182,7 @@ const articleList = (function () {
   function activatePaginationButton(number, max) {
     queryAll('#pagination .pages .active').className = '';
     if (max === 0) return;
-    queryAll('#pagination .pages a')[number].className = 'active';
+    queryAll('#pagination .pages span')[number].className = 'active';
 
     heyId('prev-page').style.display = number === 0 ? 'none' : 'block';
     heyId('next-page').style.display = number === max ? 'none' : 'block';

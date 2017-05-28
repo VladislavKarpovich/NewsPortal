@@ -18,11 +18,9 @@
     align-items: center;
 }
 
-#pagination span {
-    cursor: pointer;
-}
-
-#pagination a {
+#pagination a,
+#pagination span
+ {
     color: black;
     padding: 8px 16px;
     margin: 3px;
@@ -33,12 +31,12 @@
     height: 30px;
 }
 
-#pagination a.active {
+#pagination span.active {
     background-color: #00897B;
     color: white;
 }
 
-#pagination a:hover:not(.active) {
+#pagination span:hover:not(.active) {
     background-color: transparent;
 }
 
