@@ -22,7 +22,6 @@ function gunzip(body) {
       }
 
       const article = JSON.parse(dezipped.toString());
-      console.log(convertArticle(article));
       resolve(convertArticle(article));
     });
   });
