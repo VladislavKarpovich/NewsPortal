@@ -83,10 +83,15 @@ const articleList = (function () {
   function filterArticesHandler() {
     const form = heyId('filter-form');
     filter = {};
-    filter.tags = getFilterTags();
-    if (form.author.value !== 'Все') {
-      filter.author = form.author.value;
-    }
+
+    const author = form.author.value;
+    const isFiltByAuthor = author !== 'Все';
+    if (isFiltByAuthor) filter.author = author;
+
+    const tags = getFilterTags();
+    if (tags) filter.tags = tags;
+
+    filter = Object.assign(filter, getFilterDate());
 
     paginationPosition = 0;
     displayArticleList();
@@ -113,11 +118,11 @@ const articleList = (function () {
     const res = {};
     const dateFrom = new Date(form.dateFrom.value);
     if (dateFrom.toString() !== 'Invalid Date') {
-      res.dateFrom = dateFrom;
+      res.dateFrom = dateFrom.getTime();
     }
     const dateTo = new Date(form.dateTo.value);
     if (dateTo.toString() !== 'Invalid Date') {
-      res.dateTo = dateTo;
+      res.dateTo = dateTo.getTime();
     }
 
     return res;
