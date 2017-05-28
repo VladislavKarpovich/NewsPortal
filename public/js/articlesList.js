@@ -95,10 +95,10 @@ const articleList = (function () {
   function getFilterTags() {
     const tags = [];
     const form = heyId('filter-form');
-    const forEach = Array.prototype.forEach.call;
+    const forEach = Array.prototype.forEach;
     const labels = form.querySelectorAll('label');
 
-    forEach(labels, (label) => {
+    forEach.call(labels, (label) => {
       const isChecked = label.querySelector('input').checked;
       const tag = label.textContent;
       if (isChecked) tags.push(tag);

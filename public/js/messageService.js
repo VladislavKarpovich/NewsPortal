@@ -66,13 +66,15 @@ const messageService = (function () {
     heyId('loader-overlay').style.display = 'block';
   }
 
-  function hideLoader() {
+  function hideLoaderSuccessful() {
     heyId('checkmark').style.display = 'block';
     heyId('circle-loader').classList.add('load-complete');
-    setTimeout(() => {
-      heyId('loader-form').style.display = 'none';
-      heyId('loader-overlay').style.display = 'none';
-    }, 1250);
+    setTimeout(hideLoader, 1250);
+  }
+
+  function hideLoader() {
+    heyId('loader-form').style.display = 'none';
+    heyId('loader-overlay').style.display = 'none';
   }
 
   heyId('error-form-ok-button').addEventListener('click', hideErrorForm);
@@ -90,6 +92,7 @@ const messageService = (function () {
     showUrlInputForm,
     hideUrlInputForm,
     showLoader,
+    hideLoaderSuccessful,
     hideLoader,
   };
 }());

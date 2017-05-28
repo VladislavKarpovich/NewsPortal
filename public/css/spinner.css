@@ -167,7 +167,7 @@
     box-sizing: border-box;
     font-size: 14px;
     position: fixed;
-    z-index: 200;
+    z-index: 250;
     background: #FAFAFA;
     display: none;
 }

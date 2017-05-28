@@ -44,6 +44,7 @@
   }
 
   function displayPostPageForm(article) {
+    messageService.hideLoaderSuccessful();
     window.scrollTo(0, 0);
     const cont = heyId('post-page');
     heyId('post-page').style.display = 'block';
@@ -335,8 +336,14 @@
     let url = heyQuery('#url-input-form input').value;
     url = url.replace('https://meduza.io/', '');
     requests.getArticleFormMeduza(url)
-      .then(displayPostPageForm, messageService.showErrorForm);
+      .then(displayPostPageForm, getDataFromMeduzaError);
     messageService.hideUrlInputForm();
+    messageService.showLoader();
+  }
+
+  function getDataFromMeduzaError(message) {
+    messageService.hideLoader();
+    messageService.showErrorForm(message);
   }
 
   const mainBlock = document.querySelector('main');

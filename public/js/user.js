@@ -9,13 +9,14 @@
     };
 
     requests.login(user).then(userInHandle, userLoadErrorHandle);
+    hideLoginForm();
+    messageService.showLoader();
   }
 
   function userInHandle(user) {
-    heyId('log-in-form').style.display = 'none';
-    heyId('message-overlay').style.display = 'none';
     userInDataInit(user);
     heyId('log-in-button').removeEventListener('click', showLoginForm);
+    messageService.hideLoaderSuccessful();
   }
 
   function userInDataInit(user) {
@@ -30,20 +31,23 @@
   }
 
   function userOutHandle() {
-    const articlesButtons = heyClassName('article-item-buttons');
-    for (let i = 0; i < articlesButtons.length; i += 1) {
-      articlesButtons[i].style.display = 'none';
-    }
-
     heyId('header-user-panel').className = 'display-none';
     heyId('edit-form').className = 'display-none';
 
     heyId('log-in-button').addEventListener('click', showLoginForm);
+    messageService.hideLoaderSuccessful();
   }
 
   function userOutButtonClickHandle() {
     requests.logout()
       .then(userOutHandle, messageService.showErrorForm);
+
+    messageService.showLoader();
+  }
+
+  function userOutErroeHandle(message) {
+    messageService.hideLoader();
+    messageService.showErrorForm(message);
   }
 
   function showLoginForm() {
@@ -69,7 +73,7 @@
   }
 
   function userLoadErrorHandle(err) {
-    hideLoginForm();
+    messageService.hideLoader();
     messageService.showErrorForm(err.message, 'Ошибка входа');
   }
 
