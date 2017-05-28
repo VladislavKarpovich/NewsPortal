@@ -18,6 +18,10 @@
     align-items: center;
 }
 
+#pagination span {
+    cursor: pointer;
+}
+
 #pagination a {
     color: black;
     padding: 8px 16px;
